@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../CSS/loginStyle.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>MoviesMaster Login</title>
+  </head>
+  <body>
+    <form action="#" class="login-form">
+      <!-- Título -->
+      <h1>Login</h1>
+      <!-- Fim Título -->
+
+      <!-- ##### ##### ##### ##### ##### ##### -->
+
+      <!-- Username -->
+      <div class="txtb">
+        <input type="text" />
+        <span data-placeholder="Username"></span>
+      </div>
+      <!-- Fim Username -->
+
+      <!-- ##### ##### ##### ##### ##### ##### -->
+
+      <!-- Senha -->
+      <div class="txtb">
+        <input type="password" />
+        <span data-placeholder="Password"></span>
+      </div>
+      <!-- Fim Senha -->
+
+      <!-- ##### ##### ##### ##### ##### ##### -->
+
+      <!-- Botão Logar -->
+      <input type="submit" class="logbtn" value="Login" />
+      <!-- Fim Botão Logar -->
+
+      <!-- ##### ##### ##### ##### ##### ##### -->
+
+      <!-- Texto para cadastro -->
+      <div class="bottom-text">Don't have account? <a href="#">Sign Up</a></div>
+      <!-- Fim Texto para cadastro -->
+    </form>
+
+    <script type="text/javascript">
+      $(".txtb input").on("focus", function() {
+        $(this).addClass("focus");
+      });
+
+      $(".txtb input").on("blur", function() {
+        if ($(this).val() == "") $(this).removeClass("focus");
+      });
+    </script>
+  </body>
+</html>
