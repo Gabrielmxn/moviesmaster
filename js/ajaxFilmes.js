@@ -1,3 +1,20 @@
+function tamanhoTela(){
+	var t = document.getElementById("lista");
+	var ss = window.screen.availWidth;
+	/*if(ss <= 700 ){
+		t.className = "container-fluid"	
+		document.getElementById("coluna").style.width = ss + "px";
+		console.log(ss);
+	}
+	else {
+		t.className = 'container'
+		document.getElementById("coluna").style.width = "";
+	}*/
+
+	return ss;		
+}
+
+
 function getFilmes(pesquisar) {
 	var meses = [
 	  "janeiro",
@@ -34,7 +51,7 @@ function getFilmes(pesquisar) {
 				console.log("ready " + xmlHttp.readyState);
 				if(document.getElementById("lista")){
 					console.log("estamos dentro do IF")
-					let elemento = document.getElementById("lista");
+					var elemento = document.getElementById("lista");
 					while (elemento.firstChild) {
 						console.log("estamos dentro do while");
 					  	elemento.removeChild(elemento.firstChild);
@@ -65,22 +82,23 @@ function getFilmes(pesquisar) {
 					divRow.className = 'row mt-5 p-0'
 					divRow.id = "pagina " + i;
 
-					//criando uma coluna (bootstrap - grid)
+					//criando uma coluna (bootstrap - grid) para colocar a imagem
 					let divCol2 = document.createElement('div');
-					divCol2.className = 'col col-5 p-5 align-self-start' 
+					divCol2.className = 'col col-sm-12 col-lg-5  p-5 align-self-start' 
+					divCol2.id = "coluna";
 
-					//criando uma coluna (bootstrap - grid)
+					//Criando uma coluna para outras informações
 					let divCol = document.createElement('div');
-					divCol.className = 'col col-7 align-self-center'
+					divCol.className = 'col col-sm-12 col-lg-7 align-self-center'
 
 					//Titulo do filme
 					let p1 = document.createElement('p')
 					p1.innerHTML = "<strong id=titulo" + i + ">" + item.title + "</strong> " 
-					p1.className = "h2"
+					p1.className = "h2 text-center mb-3"
 					
 					//resumo do filme
 					let p2 = document.createElement('p')
-					
+					p2.className = "mb-3"
 					if(item.overview){
 						p2.innerHTML = '<strong>Sinopse</strong> <br> <span id=sinopse' + i + '>' + item.overview + '</span>'
 					}
@@ -106,11 +124,12 @@ function getFilmes(pesquisar) {
 					}
 					let p3 = document.createElement('p')
 					
-					p3.innerHTML = "<strong>Gênero</strong><span  id=genero" + i + "> " + generos + "</span>"
+					p3.innerHTML = "<strong>Gênero</strong><br><span  id=genero" + i + "> " + generos + "</span>"
 				
-		
+					p3.className = "mb-3"
 					//data de lançamento
 					let p5 = document.createElement('p')
+					p5.className = "mb-3"
 					let datadelancamento = item.release_date;
 					//quebrando string
 					if(datadelancamento){
@@ -126,12 +145,42 @@ function getFilmes(pesquisar) {
 					let hr = document.createElement('hr')
 					//recuperando o poster/imagem do filme
 					let img = document.createElement('img')
-					if(item.poster_path){
-						img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
-						img.className = "img-fluid"
-					}else{
-						img.src = ""
-						img.className = "img-fluid"
+					var tamanhoDaTela = tamanhoTela()
+					console.log("Tamanho da tela: " + tamanhoDaTela)
+					if(tamanhoDaTela <= 700){
+						if(item.poster_path){
+
+							divCol2.style.width = "100%";
+							divCol2.style.height = "400px"
+							divCol2.style.background = "url(https://image.tmdb.org/t/p/w500" + item.backdrop_path + ") no-repeat"; 
+							divCol2.style.backgroundSize = "cover" 
+							elemento.className = "container-fluid"
+							img.className = "imagem"
+
+							//document.getElementById("coluna").style.width = ss + "px";
+						}
+						else{
+							divCol2.style.width = "100%";
+							divCol2.style.height = "500px"
+							divCol2.style.background = "url(sem-foto.gif) no-repeat center center"; 
+							divCol2.style.backgroundSize = "cover" 
+							elemento.className = "container-fluid"
+						}
+					}
+					else
+						{
+						if(item.poster_path){
+							divCol2.style.width = "";
+							divCol2.style.height = ""
+							divCol2.style.background = ""; 
+							divCol2.style.backgroundSize = "" 	
+							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
+							img.className = "img-fluid"
+						}
+						else{
+							img.src = "semfoto.png"
+							img.className = "img-fluid"
+						}
 					}
 
 					let idFilme = document.createElement('input');
@@ -175,6 +224,7 @@ function getFilmes(pesquisar) {
 					  	elemento.removeChild(elemento.firstChild);
 					}	
 				}
+				
 				//adicionando a imagem de erro
 				let img2 = document.createElement('img')
 				img2.src = "404erro.png"
@@ -183,13 +233,10 @@ function getFilmes(pesquisar) {
 			}
 		}
 	}
+
 	//enviado a requisição
 	xmlHttp[0].send();
 	xmlHttp[1].send();
 
 }
 
-
-function teste(){
-	console.log("teste");
-}

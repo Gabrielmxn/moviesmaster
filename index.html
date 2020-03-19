@@ -5,10 +5,10 @@
 		<title>Catálogo de filmes</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="style.css" crossorigin="anonymous">
-		<script src="ajaxMelhoresFilmes.js"></script>
-		<script src="ajaxFilmes.js"></script>
+		<script src="js/ajaxMelhoresFilmes.js"></script>
+		<script src="js/ajaxFilmes.js"></script>
 	</head>
-<body id="pagina" onload="getMelhoresFilmes()">
+<body id="pagina" onload="getMelhoresFilmes('', '1'); tamanhoTela();" onresize="tamanhoTela()">
 	<nav class="navbar navbar-light bg-light mb-4">
 		<div class="container">
 			<div class="navbar-brand mb-0 h1">
@@ -16,10 +16,10 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row mb-5">
-			<div class="col">
-			<input type="text" id="pesquisar" class="form-control" onkeyup='getFilmes(document.getElementById("pesquisar").value)' placeholder="Procure o filme pelo nome">
+			<div class="col-12 form-group" >
+			<input type="text" id="pesquisar" class="form-control" onkeyup='getMelhoresFilmes(document.getElementById("pesquisar").value, 2)' placeholder="Procure o filme pelo nome">
 			</div>
 		</div>
 	</div>
@@ -29,6 +29,8 @@
 	</div>
 	<div class="container" id="lista">
 	</div>
-	<script src="requisicaoAjax.js"></script>
+	<script src="js/requisicaoAjax.js"></script>
+	
+	
 </body>
 </html>
