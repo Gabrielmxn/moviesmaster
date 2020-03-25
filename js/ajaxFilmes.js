@@ -15,7 +15,12 @@ function tamanhoTela(){
 }
 
 
+
 function getFilmes(pesquisar) {
+	//um array para recuperar o id
+	var recuperarIdGenero = [];
+
+	//um array dos meses
 	var meses = [
 	  "janeiro",
 	  "fevereiro",
@@ -30,6 +35,8 @@ function getFilmes(pesquisar) {
 	  "novembro",
 	  "dezembro"
 	];
+
+	
 	document.getElementById("tituloPagina").innerHTML = ""
 	var noFilme = document.getElementById("noPesquisa")
 	if(document.getElementById("pesquisar").value == ''){
@@ -80,7 +87,7 @@ function getFilmes(pesquisar) {
 					//criando uma linha (boostrap - grid)
 					let divRow = document.createElement('div');
 					divRow.className = 'row mt-5 p-0'
-					divRow.id = "pagina " + i;
+					divRow.id = "pagina" + i;
 
 					//criando uma coluna (bootstrap - grid) para colocar a imagem
 					let divCol2 = document.createElement('div');
@@ -103,16 +110,22 @@ function getFilmes(pesquisar) {
 						p2.innerHTML = '<strong>Sinopse</strong> <br> <span id=sinopse' + i + '>' + item.overview + '</span>'
 					}
 					else {
-						p2.innerHTML = "<strong>Resumo</strong> Não temos uma sinopse em Português do Brasil. Você pode ajudar a ampliar o nosso banco de dados adicionando uma." 
+						p2.innerHTML = '<strong>Sinopse</strong> <br> <span id=sinopse' + i + '> Não temos uma sinopse em Português do Brasil. Você pode ajudar a ampliar o nosso banco de dados adicionando uma.'
 					}
 					//gênero do filme - id
 					let generos = ""
 					for(let g in item.genre_ids){
 						console.log("Estou dentro do Genero");
+
 						if(generos){
 							generos += ", "
 						}
 						idFilmeGenero = item.genre_ids[g]
+
+						//colocando os ID de genero dentro de um array
+						recuperarIdGenero[g] = idFilmeGenero
+						//-----------------------------------------//
+
 						for(let p in jsonGeneros.genres){
 							let idGenero = jsonGeneros.genres[p].id;
 						
@@ -124,7 +137,7 @@ function getFilmes(pesquisar) {
 					}
 					let p3 = document.createElement('p')
 					
-					p3.innerHTML = "<strong>Gênero</strong><br><span  id=genero" + i + "> " + generos + "</span>"
+					p3.innerHTML = "<strong>Gênero</strong><br><span> " + generos + "</span>"
 				
 					p3.className = "mb-3"
 					//data de lançamento
@@ -143,12 +156,15 @@ function getFilmes(pesquisar) {
 					}
 					
 					let hr = document.createElement('hr')
+
 					//recuperando o poster/imagem do filme
 					let img = document.createElement('img')
 					var tamanhoDaTela = tamanhoTela()
 					console.log("Tamanho da tela: " + tamanhoDaTela)
+					//Se o tamanho da tela for menor ou igual a 700, vamos colocar para aparecer a imagem do backdrop_path
 					if(tamanhoDaTela <= 700){
-						if(item.poster_path){
+						//caso tenha alguma imagem no backdrop
+						if(item.backdrop_path){
 
 							divCol2.style.width = "100%";
 							divCol2.style.height = "400px"
@@ -156,10 +172,9 @@ function getFilmes(pesquisar) {
 							divCol2.style.backgroundSize = "cover" 
 							elemento.className = "container-fluid"
 							img.className = "imagem"
-
-							//document.getElementById("coluna").style.width = ss + "px";
 						}
 						else{
+							//caso não tenha, colocaremos a imagem abaixo.
 							divCol2.style.width = "100%";
 							divCol2.style.height = "500px"
 							divCol2.style.background = "url(sem-foto.gif) no-repeat center center"; 
@@ -167,6 +182,7 @@ function getFilmes(pesquisar) {
 							elemento.className = "container-fluid"
 						}
 					}
+					//caso contrario, vai aparecer a imagem do poster 
 					else
 						{
 						if(item.poster_path){
@@ -182,11 +198,30 @@ function getFilmes(pesquisar) {
 							img.className = "img-fluid"
 						}
 					}
-
+					//adicionando um hidden para enviar o ID do FILME
 					let idFilme = document.createElement('input');
 					idFilme.id = "idFilme" + i;
 					idFilme.value = item.id
 					idFilme.type = "hidden";
+
+					//adicionando um hidden para enviar o ID do genero
+					let idGenero = document.createElement('input');
+					idGenero.id = "genero" + i;
+					idGenero.value = recuperarIdGenero;
+					idGenero.type = "hidden";
+
+					//adicionando um hidden para enviar o nome do backdrop
+					let backdrop = document.createElement('input');
+					backdrop.id = "backdrop" + i;
+					backdrop.value = item.backdrop_path;
+					backdrop.type = "hidden";
+
+					//adicionando um hidden para enviar o nome do poster
+					let poster = document.createElement('input');
+					poster.id = "poster" + i;
+					poster.value = item.poster_path;
+					poster.type = "hidden";
+					
 					//adicionando o botão para enviar os filmes para lista 
 					let botao = document.createElement('button');
 					botao.id = "botao";
@@ -197,7 +232,6 @@ function getFilmes(pesquisar) {
 					
 
 					//Criando a árvore do DOM
-					
 					divRow.appendChild(divCol2);
 					divRow.appendChild(divCol);
 					divCol2.appendChild(img)
@@ -206,6 +240,9 @@ function getFilmes(pesquisar) {
 					divCol.appendChild(p3)
 					divCol.appendChild(p5)
 					divCol.appendChild(idFilme)
+					divCol.appendChild(idGenero)
+					divCol.appendChild(backdrop)
+					divCol.appendChild(poster)
 					divCol.appendChild(botao)
 
 					//Adicionando a árvore a cima para ser filha da div com id = lista
