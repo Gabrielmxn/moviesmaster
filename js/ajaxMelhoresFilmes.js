@@ -17,7 +17,10 @@ function tamanhoTela(){
 
 
 
-function getMelhoresFilmes(variavelQualquer) {
+function getMelhoresFilmes() {
+
+	var recuperarIdGenero = [];
+
 	//array de meses
 	var meses = [
 	  "janeiro",
@@ -95,7 +98,7 @@ function getMelhoresFilmes(variavelQualquer) {
 						p2.innerHTML = '<strong>Sinopse</strong> <br> <span id=sinopse' + i + '>' + item.overview + '</span>'
 					}
 					else {
-						p2.innerHTML = "<strong>Resumo</strong> Não temos uma sinopse em Português do Brasil. Você pode ajudar a ampliar o nosso banco de dados adicionando uma." 
+						p2.innerHTML = "<strong>Sinopse</strong>  <br> <span id=sinopse" + i + '> Não temos uma sinopse em Português do Brasil. Você pode ajudar a ampliar o nosso banco de dados adicionando uma.</span>'
 					}
 
 					//gênero do filme - id
@@ -106,6 +109,12 @@ function getMelhoresFilmes(variavelQualquer) {
 							generos += ", "
 						}
 						idFilmeGenero = item.genre_ids[g]
+
+						//colocando os ID de genero dentro de um array
+						recuperarIdGenero[g] = idFilmeGenero
+						console.log(recuperarIdGenero)
+						//-----------------------------------------//
+
 						for(let p in jsonGeneros.genres){
 							let idGenero = jsonGeneros.genres[p].id;
 						
@@ -176,10 +185,30 @@ function getMelhoresFilmes(variavelQualquer) {
 						}
 					}
 
+					//adicionando um hidden para enviar o ID do FILME
 					let idFilme = document.createElement('input');
 					idFilme.id = "idFilme" + i;
 					idFilme.value = item.id
 					idFilme.type = "hidden";
+
+					//adicionando um hidden para enviar o ID do genero
+					let idGenero = document.createElement('input');
+					idGenero.id = "genero" + i;
+					idGenero.value = recuperarIdGenero;
+					idGenero.type = "hidden";
+
+					//adicionando um hidden para enviar o nome do backdrop
+					let backdrop = document.createElement('input');
+					backdrop.id = "backdrop" + i;
+					backdrop.value = item.backdrop_path;
+					backdrop.type = "hidden";
+
+					//adicionando um hidden para enviar o nome do poster
+					let poster = document.createElement('input');
+					poster.id = "poster" + i;
+					poster.value = item.poster_path;
+					poster.type = "hidden";
+
 					//adicionando o botão para enviar os filmes para lista 
 					let botao = document.createElement('button');
 					botao.id = "botao";
@@ -198,6 +227,9 @@ function getMelhoresFilmes(variavelQualquer) {
 					divCol.appendChild(p3)
 					divCol.appendChild(p5)
 					divCol.appendChild(idFilme)
+					divCol.appendChild(idGenero)
+					divCol.appendChild(backdrop)
+					divCol.appendChild(poster)
 					divCol.appendChild(botao)
 					
 
