@@ -1,21 +1,18 @@
 function tamanhoTela(){
 	var t = document.getElementById("lista");
 	var ss = window.screen.availWidth;
-	/*if(ss <= 700 ){
-		t.className = "container-fluid"	
-		document.getElementById("coluna").style.width = ss + "px";
-		console.log(ss);
-	}
-	else {
-		t.className = 'container'
-		document.getElementById("coluna").style.width = "";
-	}*/
+
+	
 
 	return ss;		
 }
 
 
-
+function funcaoQualquer(status){
+	if(!document.getElementById("pesquisar").value){
+		getMelhoresFilmes();
+	}
+}
 
 function getMelhoresFilmes() {
 
@@ -50,12 +47,12 @@ function getMelhoresFilmes() {
 		xmlHttp[o].onreadystatechange = () => {
 			//verificando o status e o state da API.
 			if(xmlHttp[0].readyState == 4 & xmlHttp[0].status == 200 & xmlHttp[1].readyState == 4 & xmlHttp[1].status == 200){
-				console.log("ready " + xmlHttp.readyState);
+			//	console.log("ready " + xmlHttp.readyState);
 				if(document.getElementById("lista")){
-					console.log("estamos dentro do IF")
+					//console.log("estamos dentro do IF")
 					var elemento = document.getElementById("lista");
 					while (elemento.firstChild) {
-						console.log("estamos dentro do while");
+						//console.log("estamos dentro do while");
 					  	elemento.removeChild(elemento.firstChild);
 					}
 				}
@@ -66,7 +63,7 @@ function getMelhoresFilmes() {
 				let jsonGeneros = JSON.parse(XMLGeneros)
 				let jsonFilmes = JSON.parse(XMLFilmes)
 				console.log(jsonFilmes)
-				console.log(jsonGeneros)
+				//console.log(jsonGeneros)
 				let m = ""
 				//pecorrendo o objeto e recuperando os seus valores.
 
@@ -80,12 +77,12 @@ function getMelhoresFilmes() {
 
 					//criando uma coluna (bootstrap - grid) para colocar a imagem
 					let divCol2 = document.createElement('div');
-					divCol2.className = 'col col-sm-12 col-lg-5  p-5 align-self-start' 
+					divCol2.className = 'col-sm-12 col-md-12 col-lg-5  p-5 align-self-start' 
 					divCol2.id = "coluna";
 
 					//Criando uma coluna para outras informações
 					let divCol = document.createElement('div');
-					divCol.className = 'col col-sm-12 col-lg-7 align-self-center'
+					divCol.className = 'col-sm-12 col-md-12 col-lg-7 align-self-center'
 		
 					//Titulo do filme
 					let p1 = document.createElement('p')
@@ -104,7 +101,7 @@ function getMelhoresFilmes() {
 					//gênero do filme - id
 					let generos = ""
 					for(let g in item.genre_ids){
-						console.log("Estou dentro do Genero");
+						//console.log("Estou dentro do Genero");
 						if(generos){
 							generos += ", "
 						}
@@ -112,21 +109,21 @@ function getMelhoresFilmes() {
 
 						//colocando os ID de genero dentro de um array
 						recuperarIdGenero[g] = idFilmeGenero
-						console.log(recuperarIdGenero)
+					//	console.log(recuperarIdGenero)
 						//-----------------------------------------//
 
 						for(let p in jsonGeneros.genres){
 							let idGenero = jsonGeneros.genres[p].id;
 						
 							if(idGenero == idFilmeGenero){
-								console.log("Entrou aqui");
+							//	console.log("Entrou aqui");
 								generos += jsonGeneros.genres[p].name
 							}
 						}				
 					}
 
 					let p3 = document.createElement('p')
-					p3.innerHTML = "<strong>Gênero</strong><br><span  id=genero" + i + "> " + generos + "</span>"
+					p3.innerHTML = "<strong>Gênero</strong><br><span> " + generos + "</span>"
 		
 					//data de lançamento
 					let p5 = document.createElement('p')
@@ -136,20 +133,20 @@ function getMelhoresFilmes() {
 					let ano = datadelancamento.substr(0, 4);
 					let mes = datadelancamento.substr(5, 2);
 					let dia = datadelancamento.substr(8, 2);
-					console.log("ano " + ano);
-					console.log("mes " + mes);
+					//console.log("ano " + ano);
+					//console.log("mes " + mes);
 					if(mes){
 						mes = meses[mes-1]
 					}
-					console.log("dia " + dia);
+					//console.log("dia " + dia);
 					p5.innerHTML = '<strong>Data de lançamento</strong><br> <span id=data' + i + '>' +  dia + ' de ' + mes + '  ' + ano + '</span>'
 					let hr = document.createElement('hr')
 
 					//recuperando o poster/imagem do filme
 					let img = document.createElement('img')
 					var tamanhoDaTela = tamanhoTela()
-					console.log("Tamanho da tela: " + tamanhoDaTela)
-					if(tamanhoDaTela <= 700){
+					//console.log("Tamanho da tela: " + tamanhoDaTela)
+					if(tamanhoDaTela >= 768 && tamanhoDaTela <= 1024){
 						if(item.poster_path){
 
 							divCol2.style.width = "100%";
@@ -164,12 +161,12 @@ function getMelhoresFilmes() {
 						else{
 							divCol2.style.width = "100%";
 							divCol2.style.height = "500px"
-							divCol2.style.background = "url(sem-foto.gif) no-repeat center center"; 
+							divCol2.style.background = "url(img/sem-foto.gif) no-repeat center center"; 
 							divCol2.style.backgroundSize = "cover" 
 							elemento.className = "container-fluid"
 						}
 					}
-					else
+					else if(tamanhoDaTela < 768 || tamanhoDaTela > 1024)
 						{
 						if(item.poster_path){
 							divCol2.style.width = "";
@@ -178,10 +175,12 @@ function getMelhoresFilmes() {
 							divCol2.style.backgroundSize = "" 	
 							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
 							img.className = "img-fluid"
+							elemento.className = "container"
 						}
 						else{
-							img.src = "semfoto.png"
+							img.src = "img/semfoto.png"
 							img.className = "img-fluid"
+							elemento.className = "container"
 						}
 					}
 
@@ -192,10 +191,10 @@ function getMelhoresFilmes() {
 					idFilme.type = "hidden";
 
 					//adicionando um hidden para enviar o ID do genero
-					let idGenero = document.createElement('input');
-					idGenero.id = "genero" + i;
-					idGenero.value = recuperarIdGenero;
-					idGenero.type = "hidden";
+					let  idGeneroTe = document.createElement('input');
+					idGeneroTe.id = "genero" + i;
+					idGeneroTe.value = recuperarIdGenero;
+					idGeneroTe.type = "hidden";
 
 					//adicionando um hidden para enviar o nome do backdrop
 					let backdrop = document.createElement('input');
@@ -227,7 +226,7 @@ function getMelhoresFilmes() {
 					divCol.appendChild(p3)
 					divCol.appendChild(p5)
 					divCol.appendChild(idFilme)
-					divCol.appendChild(idGenero)
+					divCol.appendChild(idGeneroTe)
 					divCol.appendChild(backdrop)
 					divCol.appendChild(poster)
 					divCol.appendChild(botao)

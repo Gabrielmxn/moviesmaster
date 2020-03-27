@@ -5,15 +5,15 @@
 		<title>Catálogo de filmes</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/style_principal.css" crossorigin="anonymous">
-		
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		
 	</head>
-<body id="pagina" onload="getMelhoresFilmes(); tamanhoTela();" onresize="tamanhoTela()">
+<body id="pagina" onload="funcaoQualquer()" onresize="funcaoQualquer(); qualquerFuncaoFilme()" >
 	<nav class="navbar navbar-light bg-light mb-4">
 		<div class="container">
 
 			<div class="navbar-brand mb-0 ">
-				<img src="img/logo.png" width="100" height="100" class="d-inline-block align-top">
+				<img src="img/LOGO.png" width="100" height="100" class="d-inline-block align-top">
 						
 			</div>
 			<div >
@@ -25,7 +25,7 @@
 	<div class="container">
 		<div class="row mb-5">
 			<div class="col-12 form-group" >
-			<input type="text" id="pesquisar" class="form-control" onkeyup='getFilmes(document.getElementById("pesquisar").value)' placeholder="Procure o filme pelo nome">
+			<input type="text" id="pesquisar" class="form-control" onkeyup='qualquerFuncaoFilme(document.getElementById("pesquisar").value)' placeholder="Procure o filme pelo nome">
 			</div>
 		</div>
 	</div>

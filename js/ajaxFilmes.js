@@ -13,7 +13,24 @@ function tamanhoTela(){
 
 	return ss;		
 }
-
+var noFilme = '';
+function qualquerFuncaoFilme(tpesquisa){
+	console.log("Teste do value: " + tpesquisa)
+	//Colocando a nó dentro de uma variável
+	noFilme = document.getElementById("noPesquisa");
+	if(document.getElementById("pesquisar").value){
+		getFilmes(document.getElementById("pesquisar").value);
+	}
+	else if(document.getElementById("pesquisar").value == ''){
+		
+		//chamando a função de melhores filmes
+		getMelhoresFilmes();
+		//apagando o que tem dentro da variável
+		noFilme.innerHTML = ""
+		//Colocando um novo titulo após apagar a pesquisa
+		document.getElementById("tituloPagina").innerHTML = "Melhores filmes da semana"
+	}
+}
 
 
 function getFilmes(pesquisar) {
@@ -35,32 +52,38 @@ function getFilmes(pesquisar) {
 	  "novembro",
 	  "dezembro"
 	];
-
+	//--FIM DO ARRAY--//
 	
+	//Apagando o titulo da pagina 
 	document.getElementById("tituloPagina").innerHTML = ""
-	var noFilme = document.getElementById("noPesquisa")
+	
+	/*//verificando se pesquisa tem algum valor
 	if(document.getElementById("pesquisar").value == ''){
-		getMelhoresFilmes();
+		//chamando a função de melhores filmes
+		
+		//apagando o que tem dentro da variável
 		noFilme.innerHTML = ""
+		//Colocando um novo titulo após apagar a pesquisa
 		document.getElementById("tituloPagina").innerHTML = "Melhores filmes da semana"
-	}
+	}*/
 	let xmlHttp = [];
 	xmlHttp[0] = new XMLHttpRequest();
 	xmlHttp[1] = new XMLHttpRequest();
-	//buscar  API
+	//buscar  API - FILMES
 	xmlHttp[0].open('GET', 'https://api.themoviedb.org/3/search/movie?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BRS&query=' + pesquisar + '&page=1&include_adult=false');
+	//buscar API - Generos
 	xmlHttp[1].open('GET', 'https://api.themoviedb.org/3/genre/movie/list?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BR');
 	//Pecorrendo o array xmlHttp
 	for(let o in xmlHttp){	
 		xmlHttp[o].onreadystatechange = () => {
 			//verificando o status e o state da API.
 			if(xmlHttp[0].readyState == 4 & xmlHttp[0].status == 200 & xmlHttp[1].readyState == 4 & xmlHttp[1].status == 200){
-				console.log("ready " + xmlHttp.readyState);
+				//console.log("ready " + xmlHttp.readyState);
 				if(document.getElementById("lista")){
-					console.log("estamos dentro do IF")
+					//console.log("estamos dentro do IF")
 					var elemento = document.getElementById("lista");
 					while (elemento.firstChild) {
-						console.log("estamos dentro do while");
+						//console.log("estamos dentro do while");
 					  	elemento.removeChild(elemento.firstChild);
 					}
 				}
@@ -71,11 +94,10 @@ function getFilmes(pesquisar) {
 				let jsonGeneros = JSON.parse(XMLGeneros)
 				let jsonFilmes = JSON.parse(XMLFilmes)
 				console.log(jsonFilmes)
-				console.log(jsonGeneros)
+				//console.log(jsonGeneros)
 
 				if(jsonFilmes['results'] == ""){
 					//não encontramos nenhum filme - Não conseguimos encontrar nada relacionado a pesquisa.
-
 					noFilme.innerHTML = "Não conseguimos encontrar nada relacionado a '" +  pesquisar + "'." 
 				}else {
 					noFilme.innerHTML = ""
@@ -91,12 +113,12 @@ function getFilmes(pesquisar) {
 
 					//criando uma coluna (bootstrap - grid) para colocar a imagem
 					let divCol2 = document.createElement('div');
-					divCol2.className = 'col col-sm-12 col-lg-5  p-5 align-self-start' 
+					divCol2.className = 'col-sm-12 col-md-12 col-lg-5  p-5 align-self-start' 
 					divCol2.id = "coluna";
 
 					//Criando uma coluna para outras informações
 					let divCol = document.createElement('div');
-					divCol.className = 'col col-sm-12 col-lg-7 align-self-center'
+					divCol.className = 'col-sm-12 col-md-12 col-lg-7 align-self-center'
 
 					//Titulo do filme
 					let p1 = document.createElement('p')
@@ -115,7 +137,7 @@ function getFilmes(pesquisar) {
 					//gênero do filme - id
 					let generos = ""
 					for(let g in item.genre_ids){
-						console.log("Estou dentro do Genero");
+					//	console.log("Estou dentro do Genero");
 
 						if(generos){
 							generos += ", "
@@ -130,7 +152,7 @@ function getFilmes(pesquisar) {
 							let idGenero = jsonGeneros.genres[p].id;
 						
 							if(idGenero == idFilmeGenero){
-								console.log("Entrou aqui");
+							//	console.log("Entrou aqui");
 								generos += jsonGeneros.genres[p].name
 							}
 						}				
@@ -159,10 +181,11 @@ function getFilmes(pesquisar) {
 
 					//recuperando o poster/imagem do filme
 					let img = document.createElement('img')
+					//Recuperando o tamanho da tela. Aqui estamos chamando uma função que recupera o valor da tela do usuário.
 					var tamanhoDaTela = tamanhoTela()
-					console.log("Tamanho da tela: " + tamanhoDaTela)
+					//console.log("Tamanho da tela: " + tamanhoDaTela)
 					//Se o tamanho da tela for menor ou igual a 700, vamos colocar para aparecer a imagem do backdrop_path
-					if(tamanhoDaTela <= 700){
+					if(tamanhoDaTela >= 768 && tamanhoDaTela <= 1024){
 						//caso tenha alguma imagem no backdrop
 						if(item.backdrop_path){
 
@@ -177,24 +200,35 @@ function getFilmes(pesquisar) {
 							//caso não tenha, colocaremos a imagem abaixo.
 							divCol2.style.width = "100%";
 							divCol2.style.height = "500px"
-							divCol2.style.background = "url(sem-foto.gif) no-repeat center center"; 
+							divCol2.style.background = "url(img/sem-foto.gif) no-repeat center center"; 
 							divCol2.style.backgroundSize = "cover" 
 							elemento.className = "container-fluid"
 						}
 					}
 					//caso contrario, vai aparecer a imagem do poster 
-					else
+					else if(tamanhoDaTela < 768 || tamanhoDaTela > 1024)
 						{
-						if(item.poster_path){
+						//colocaremos uma foto que está dentro do servidor, caso não tenha nenhuma foto pela API.
+						if(item.poster_path == null){
+							divCol2.style.width = "";
+							divCol2.style.height = ""
+							divCol2.style.background = ""; 
+							divCol2.style.backgroundSize = "" 
+							console.log("Teste do valor de poster: " + item.poster_path)
+							elemento.className = "container"
+							img.src = "img/semfoto.png"
+							img.className = "img-fluid"
+
+							
+						}
+						else{
+							//caso o valor seja diferente de null, significa que terá uma poster.
 							divCol2.style.width = "";
 							divCol2.style.height = ""
 							divCol2.style.background = ""; 
 							divCol2.style.backgroundSize = "" 	
+							elemento.className = "container"
 							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
-							img.className = "img-fluid"
-						}
-						else{
-							img.src = "semfoto.png"
 							img.className = "img-fluid"
 						}
 					}

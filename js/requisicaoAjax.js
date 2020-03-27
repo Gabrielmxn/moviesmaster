@@ -10,7 +10,7 @@ function enviar(id){
 		var ajax = new XMLHttpRequest();
 
 		// Seta tipo de requisição: Post e a URL da API
-		ajax.open("POST", "http://localhost/ProjetoMTAG/enviarRequisicaoBd.php", true);
+		ajax.open("POST", "http://mistermoveiss.rf.gd/enviarRequisicaoBd.php", true);
 		ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 		// Seta paramêtros da requisição e envia a requisição
