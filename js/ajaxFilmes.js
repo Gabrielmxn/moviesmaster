@@ -185,51 +185,57 @@ function getFilmes(pesquisar) {
 					var tamanhoDaTela = tamanhoTela()
 					//console.log("Tamanho da tela: " + tamanhoDaTela)
 					//Se o tamanho da tela for menor ou igual a 700, vamos colocar para aparecer a imagem do backdrop_path
-					if(tamanhoDaTela >= 768 && tamanhoDaTela <= 1024){
-						//caso tenha alguma imagem no backdrop
-						if(item.backdrop_path){
+					if(tamanhoDaTela > 768)
+						{
+						if(item.poster_path){
+							divCol2.style.width = "";
+							divCol2.style.height = ""
+							divCol2.style.background = ""; 
+							divCol2.style.backgroundSize = "" 	
+							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
+							img.className = "img-fluid rounded mx-auto d-block"
+							elemento.className = "container"
+						}
+						else{
+							img.src = "img/semfoto.png"
+							img.className = "img-fluid mx-auto d-block"
+							elemento.className = "container"
+						}
+					}
+					else if(tamanhoDaTela <= 500){
+						if(item.poster_path){
+							divCol2.style.width = "100%";
+							divCol2.style.height = ""
+							divCol2.style.background = ""; 
+							divCol2.style.backgroundSize = "" 	
+							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
+							img.className = "img-fluid mx-auto d-block"
+							elemento.className = "container"
+						}
+						else{
+							img.src = "img/semfoto.png"
+							img.className = "img-fluid mx-auto d-block"
+							elemento.className = "container"
+						}
+					}
+					else if(tamanhoDaTela > 500 && tamanhoDaTela <= 768){
+						if(item.poster_path){
 
 							divCol2.style.width = "100%";
 							divCol2.style.height = "400px"
-							divCol2.style.background = "url(https://image.tmdb.org/t/p/w500" + item.backdrop_path + ") no-repeat"; 
+							divCol2.style.background = "url(https://image.tmdb.org/t/p/w500" + item.backdrop_path + ") no-repeat center center"; 
 							divCol2.style.backgroundSize = "cover" 
 							elemento.className = "container-fluid"
 							img.className = "imagem"
+
+							//document.getElementById("coluna").style.width = ss + "px";
 						}
 						else{
-							//caso não tenha, colocaremos a imagem abaixo.
 							divCol2.style.width = "100%";
 							divCol2.style.height = "500px"
 							divCol2.style.background = "url(img/sem-foto.gif) no-repeat center center"; 
 							divCol2.style.backgroundSize = "cover" 
 							elemento.className = "container-fluid"
-						}
-					}
-					//caso contrario, vai aparecer a imagem do poster 
-					else if(tamanhoDaTela < 768 || tamanhoDaTela > 1024)
-						{
-						//colocaremos uma foto que está dentro do servidor, caso não tenha nenhuma foto pela API.
-						if(item.poster_path == null){
-							divCol2.style.width = "";
-							divCol2.style.height = ""
-							divCol2.style.background = ""; 
-							divCol2.style.backgroundSize = "" 
-							console.log("Teste do valor de poster: " + item.poster_path)
-							elemento.className = "container"
-							img.src = "img/semfoto.png"
-							img.className = "img-fluid"
-
-							
-						}
-						else{
-							//caso o valor seja diferente de null, significa que terá uma poster.
-							divCol2.style.width = "";
-							divCol2.style.height = ""
-							divCol2.style.background = ""; 
-							divCol2.style.backgroundSize = "" 	
-							elemento.className = "container"
-							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
-							img.className = "img-fluid"
 						}
 					}
 					//adicionando um hidden para enviar o ID do FILME

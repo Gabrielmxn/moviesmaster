@@ -8,7 +8,7 @@ function tamanhoTela(){
 }
 
 
-function funcaoQualquer(status){
+function funcaoQualquer(){
 	if(!document.getElementById("pesquisar").value){
 		getMelhoresFilmes();
 	}
@@ -77,7 +77,7 @@ function getMelhoresFilmes() {
 
 					//criando uma coluna (bootstrap - grid) para colocar a imagem
 					let divCol2 = document.createElement('div');
-					divCol2.className = 'col-sm-12 col-md-12 col-lg-5  p-5 align-self-start' 
+					divCol2.className = 'col-sm-12 col-md-12 col-lg-5  mb-1 p-0 align-self-start' 
 					divCol2.id = "coluna";
 
 					//Criando uma coluna para outras informações
@@ -146,7 +146,41 @@ function getMelhoresFilmes() {
 					let img = document.createElement('img')
 					var tamanhoDaTela = tamanhoTela()
 					//console.log("Tamanho da tela: " + tamanhoDaTela)
-					if(tamanhoDaTela >= 768 && tamanhoDaTela <= 1024){
+					
+					if(tamanhoDaTela > 768)
+						{
+						if(item.poster_path){
+							divCol2.style.width = "";
+							divCol2.style.height = ""
+							divCol2.style.background = ""; 
+							divCol2.style.backgroundSize = "" 	
+							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
+							img.className = "img-fluid rounded mx-auto d-block"
+							elemento.className = "container"
+						}
+						else{
+							img.src = "img/semfoto.png"
+							img.className = "img-fluid mx-auto d-block"
+							elemento.className = "container"
+						}
+					}
+					else if(tamanhoDaTela <= 500){
+						if(item.poster_path){
+							divCol2.style.width = "100%";
+							divCol2.style.height = ""
+							divCol2.style.background = ""; 
+							divCol2.style.backgroundSize = "" 	
+							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
+							img.className = "img-fluid mx-auto d-block"
+							elemento.className = "container"
+						}
+						else{
+							img.src = "img/semfoto.png"
+							img.className = "img-fluid mx-auto d-block"
+							elemento.className = "container"
+						}
+					}
+					else if(tamanhoDaTela > 500 && tamanhoDaTela <= 768){
 						if(item.poster_path){
 
 							divCol2.style.width = "100%";
@@ -164,23 +198,6 @@ function getMelhoresFilmes() {
 							divCol2.style.background = "url(img/sem-foto.gif) no-repeat center center"; 
 							divCol2.style.backgroundSize = "cover" 
 							elemento.className = "container-fluid"
-						}
-					}
-					else if(tamanhoDaTela < 768 || tamanhoDaTela > 1024)
-						{
-						if(item.poster_path){
-							divCol2.style.width = "";
-							divCol2.style.height = ""
-							divCol2.style.background = ""; 
-							divCol2.style.backgroundSize = "" 	
-							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
-							img.className = "img-fluid"
-							elemento.className = "container"
-						}
-						else{
-							img.src = "img/semfoto.png"
-							img.className = "img-fluid"
-							elemento.className = "container"
 						}
 					}
 
