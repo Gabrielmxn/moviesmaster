@@ -10,7 +10,7 @@ function enviar(id){
 		var ajax = new XMLHttpRequest();
 
 		// Seta tipo de requisição: Post e a URL da API
-		ajax.open("POST", "http://mistermoveiss.rf.gd/enviarRequisicaoBd.php", true);
+		ajax.open("POST", "http://localhost/mistermoveis/enviarRequisicaoBd.php", true);
 		ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 		// Seta paramêtros da requisição e envia a requisição
@@ -19,7 +19,7 @@ function enviar(id){
 		// Cria um evento para receber o retorno.
 		ajax.onreadystatechange = function() {
 		  // Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
-			if (ajax.readyState == 4 && ajax.status == 200) {
+			if(ajax.readyState == 4 && ajax.status == 200) {
 				var data = ajax.responseText;
 		    // Retorno do Ajax
 				console.log(data);

@@ -1,0 +1,18 @@
+img {
+	width: 150px;
+}
+
+.borde {
+	border: 1px solid red;
+			
+}
+
+.item{
+	margin: 20px 10px;
+	transition: 250ms all;
+}
+
+.item:hover {
+	margin: 20px 10px 0px 10px;
+  	transform: scale(1.1);
+}

@@ -1,9 +1,6 @@
 function tamanhoTela(){
 	var t = document.getElementById("lista");
 	var ss = window.screen.availWidth;
-
-	
-
 	return ss;		
 }
 
@@ -17,7 +14,6 @@ function funcaoQualquer(){
 function getMelhoresFilmes() {
 
 	var recuperarIdGenero = [];
-
 	//array de meses
 	var meses = [
 	  "janeiro",
@@ -47,7 +43,7 @@ function getMelhoresFilmes() {
 		xmlHttp[o].onreadystatechange = () => {
 			//verificando o status e o state da API.
 			if(xmlHttp[0].readyState == 4 & xmlHttp[0].status == 200 & xmlHttp[1].readyState == 4 & xmlHttp[1].status == 200){
-			//	console.log("ready " + xmlHttp.readyState);
+				//console.log("ready " + xmlHttp.readyState);
 				if(document.getElementById("lista")){
 					//console.log("estamos dentro do IF")
 					var elemento = document.getElementById("lista");
@@ -109,7 +105,7 @@ function getMelhoresFilmes() {
 
 						//colocando os ID de genero dentro de um array
 						recuperarIdGenero[g] = idFilmeGenero
-					//	console.log(recuperarIdGenero)
+						//	console.log(recuperarIdGenero)
 						//-----------------------------------------//
 
 						for(let p in jsonGeneros.genres){
@@ -146,7 +142,7 @@ function getMelhoresFilmes() {
 					let img = document.createElement('img')
 					var tamanhoDaTela = tamanhoTela()
 					//console.log("Tamanho da tela: " + tamanhoDaTela)
-					
+					//valores da largura da tela maior que 768
 					if(tamanhoDaTela > 768)
 						{
 						if(item.poster_path){
@@ -164,13 +160,14 @@ function getMelhoresFilmes() {
 							elemento.className = "container"
 						}
 					}
+					//valores da largura da tela menor ou igual a 500
 					else if(tamanhoDaTela <= 500){
 						if(item.poster_path){
 							divCol2.style.width = "100%";
 							divCol2.style.height = ""
 							divCol2.style.background = ""; 
 							divCol2.style.backgroundSize = "" 	
-							img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
+							img.src = "https://image.tmdb.org/t/p/original" + item.poster_path
 							img.className = "img-fluid mx-auto d-block"
 							elemento.className = "container"
 						}
@@ -180,8 +177,9 @@ function getMelhoresFilmes() {
 							elemento.className = "container"
 						}
 					}
+					//valores maior que 500 e menor ou igual a 768
 					else if(tamanhoDaTela > 500 && tamanhoDaTela <= 768){
-						if(item.poster_path){
+						if(item.backdrop_path){
 
 							divCol2.style.width = "100%";
 							divCol2.style.height = "400px"

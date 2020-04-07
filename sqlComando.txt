@@ -1,0 +1,24 @@
+INSERT INTO usuario(nome, senha)values("Gabriel", "12345");
+INSERT INTO usuario(nome, senha)values("Jessica", "12345");
+INSERT INTO usuario(nome, senha)values("Ferreira", "12345");
+
+_____________________________________________________________
+
+
+INSERT INTO filmes(idFilmes, nome, fk_idStatus)values(38700, "Bad Boys Para Sempre", "1");
+INSERT INTO filmes(idFilmes, nome, fk_idStatus)values(181812, "Star Wars - A Ascensão Skywalk", "1");
+INSERT INTO filmes(idFilmes, nome, fk_idStatus)values(514847, "A Caçada", "1");
+
+
+
+
+________________________________________________________________________________
+
+INSERT INTO usuario(idFilmes, idUsuario)values(181812, 2);
+INSERT INTO usuario(idFilmes, idUsuario)values(38700, 2);
+INSERT INTO usuario(idFilmes, idUsuario)values(514847, 2);
+
+ 
+__________________________________________________
+INSERT INTO status(idStatus, status)values(1, 0);
+INSERT INTO status(idStatus, status)values(2, 1);

@@ -1,22 +1,12 @@
+//capturando o valor da largura  da tela
 function tamanhoTela(){
-	var t = document.getElementById("lista");
 	var ss = window.screen.availWidth;
-	/*if(ss <= 700 ){
-		t.className = "container-fluid"	
-		document.getElementById("coluna").style.width = ss + "px";
-		console.log(ss);
-	}
-	else {
-		t.className = 'container'
-		document.getElementById("coluna").style.width = "";
-	}*/
-
 	return ss;		
 }
+
 var noFilme = '';
 function qualquerFuncaoFilme(tpesquisa){
-	console.log("Teste do value: " + tpesquisa)
-	//Colocando a nó dentro de uma variável
+	//Colocando o nó dentro de uma variável
 	noFilme = document.getElementById("noPesquisa");
 	if(document.getElementById("pesquisar").value){
 		getFilmes(document.getElementById("pesquisar").value);
