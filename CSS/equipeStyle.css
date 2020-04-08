@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Baloo Paaji 2', cursive;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(120deg, #222f3e, #f6b93b);
+}
+
+.team-section {
+  background: #f2f2f2;
+  text-align: center;
+}
+
+.inner-width {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px;
+  color: #333;
+  overflow: hidden;
+}
+
+.team-section h1 {
+  font-size: 40px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  display: inline-block;
+  border-bottom: 4px solid;
+  padding-bottom: 10px;
+}
+
+.pe {
+  float: left;
+  width: calc(100% / 3);
+  overflow: hidden;
+  padding: 20px 0;
+  transition: 0.4s;
+  margin-top: 20px;
+}
+
+.pe:hover {
+  background: #f6b93b;
+}
+
+.pe img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.p-name {
+  margin: 16px 0;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.p-des {
+  font-style: italic;
+  color: #222f3e;
+  font-size: 18px;
+}
+
+.p-md {
+  margin-top: 30px;
+}
+
+.p-md a {
+  margin: 0 5px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  transition: 0.4s;
+  transform: scale(1.2);
+}
+
+.p-md a:hover {
+  transform: scale(2.5);
+}
+
+.p-md a i {
+  color: #222f3e;
+  line-height: 30px;
+}
+
+@media screen and (max-width: 600px) {
+  .pe {
+    width: 100%;
+  }
+}

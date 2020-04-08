@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  font-family: "Baloo 2", cursive;
+  font-family: 'Baloo Paaji 2', cursive;
   box-sizing: border-box;
 }
 
@@ -57,7 +57,7 @@ body {
 }
 
 .txtb span::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 0%;
   height: 2px;
