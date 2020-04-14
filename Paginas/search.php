@@ -28,10 +28,11 @@ else {
   	<link rel="stylesheet" href="../css/style_principal.css">
 </head>
 <body onload="<?= $funcao ?>">
+	
 	<input id="pesquisar" type="hidden" value='<?= $pesquisa ?>' >
 
 	<div class="container-fluid" >
-		<p></p>
+		<p class="ml-3 mt-3">Você pesquisou por "<?= $pesquisa ?>"</p>
 		<div id="listaPesquisa" class="row text-left align-middle d-flex justify-content-left ml-2 mr-2">	
 		</div>
 	</div>

@@ -2,7 +2,7 @@
 
 function getPesquisaFilmes() {
 	let pes = document.getElementById("pesquisar").value
-	document.getElementById("search").value = pes;
+	document.getElementById("search").value = " ";
 	
 	//buscar  API
 	for(let h = 1; h<=2; h++){
