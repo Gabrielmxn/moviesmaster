@@ -1,6 +1,7 @@
 <?php 
-	include "php/recuperandoLista.php"
-	
+	include "php/menu.php";
+	include "php/recuperandoLista.php";
+
 ?>
 <!DOCTYPE html>
 

@@ -22,7 +22,7 @@ function getIdFilmes() {
 				a.href = "listaGet.php?idFilme=" + resultado[i];
 
 				let img = document.createElement('img')
-				img.className = "item round float-left borde";
+				img.className = "item round float-left";
 				img.src = "https://image.tmdb.org/t/p/original" + jsonFilmes.poster_path
 				//Criando a árvore do DOM
 				a.appendChild(img);

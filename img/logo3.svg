@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" viewBox="0 0 2000 2000">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #070606;
+        stroke-linejoin: round;
+        font-size: 788.889px;
+        font-family: Aileron;
+        font-weight: 800;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 20px;
+        fill: #fff;
+      }
+
+      .cls-2 {
+        stroke: #000;
+      }
+    </style>
+  </defs>
+  <text id="M_T_" data-name="M T  " class="cls-1" x="0.353" y="952">M T  </text>
+  <text id="M_V" data-name="M V" class="cls-1" x="484.736" y="1833">M V</text>
+  <rect id="Retângulo_Arredondado_1" data-name="Retângulo Arredondado 1" class="cls-2" x="449" y="1000" width="1102" height="241" rx="10" ry="10"/>
+</svg>
