@@ -4,11 +4,12 @@ function obterFilmesPalavraChave(palavraChave) {
 	let pes = document.getElementById("pesquisar").value
 	document.getElementById("search").value = " ";
 	//buscar  API
-	for(let h = 1; h<=2; h++){
+	//var tamanho = "";
+	for(let h = 1; h <= 3; h++){
 		let xmlHttp = new XMLHttpRequest();
-	xmlHttp.open('GET', 'https://api.themoviedb.org/3/keyword/' + palavraChave + '/movies?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BR&include_adult=false');
+	xmlHttp.open('GET', 'https://api.themoviedb.org/3/keyword/' + palavraChave + '/movies?api_key=bd9f051458a4c87fe4c873ef463542e3&page=' + h +'language=pt-BR&include_adult=false');
 
-	console.log("Valor de H: " + h);
+	console.log("Valor sss de H: " + h);
 	//Pecorrendo o array xmlHttp
 		xmlHttp.onreadystatechange = () => {
 			//verificando o status e o state da API.
@@ -19,6 +20,7 @@ function obterFilmesPalavraChave(palavraChave) {
 				console.log(jsonFilmes)
 				//console.log(jsonGeneros)
 				let m = ""
+				//tamanho = jsonFilmes.total_pages
 				//Criando uma coluna para outras informações
 				for(let i in jsonFilmes['results']){
 					let item = 	jsonFilmes['results'][i]

@@ -1,16 +1,9 @@
 <?php
 
 
-
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <script src="js/teste.js"></script>
-</head>
-<body>
+
   <!--Navbar -->
   <nav class="mb-0 navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="index.php">
@@ -41,11 +34,10 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default"
             aria-labelledby="navbarDropdownMenuLink-333">
-           <!-- <p class="dropdown-item">Nome usuario</p> --><!-- nome do usuário após o login -->
-            <a class="dropdown-item" href="login.php">Login</a>
-            <a class="dropdown-item" href="cadastro.php">Criar conta</a>
-            <!-- <a class="dropdown-item" href="#">Trocar senha</a> --> <!-- após o login -->
-            <!-- <a class="dropdown-item" href="listaFilmes.php">Lista</a>--> <!-- após o login -->
+            <p class="dropdown-item"><?= $logado ?></p>
+            <a class="dropdown-item" href="#">Trocar senha</a> <!-- após o login -->
+            <a class="dropdown-item" href="listaFilmes.php">Lista</a> <!-- após o login -->
+              <a class="dropdown-item" href="../php/encerrar.php?logout=1">Encerrar</a>
            <!-- <a class="dropdown-item" href="equipe.php">Equipe</a> --> <!-- vai ficar no footer -->
           </div>
         </li>

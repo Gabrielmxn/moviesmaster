@@ -1,5 +1,6 @@
 <?php
 
+include "../php/sessao.php";
 include "../php/menu.php";
 include "../php/carousel.php";
 

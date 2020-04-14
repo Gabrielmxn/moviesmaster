@@ -1,4 +1,5 @@
 <?php 
+	include "../php/sessao.php";
 	include "../php/menu.php";
 	include "../php/recuperandoLista.php";
 
@@ -21,6 +22,7 @@
 
 	<div class="container-fluid">
 		<h3 class="my-3">Sua lista</h3>
+		<p><?=$vazia ?></p>
 		<div id="listFilmes" class="row text-left align-middle d-flex justify-content-left ml-2 mr-2">	
 		</div>
 	</div>

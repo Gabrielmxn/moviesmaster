@@ -1,4 +1,5 @@
 <?php 
+include "../php/sessao.php";
 include "../php/menu.php";
 $pesquisa = $_GET['pesquisa'];
 if($pesquisa == 'DC COMICS'){
