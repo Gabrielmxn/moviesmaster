@@ -37,11 +37,11 @@ function getFilmesMaisClassificados() {
 					let item = jsonFilmes['results'][i]
 
 					let a = document.createElement('a');
-					a.href = "listaGet.php?idFilme=" + item.id;
+					a.href = "filmeInfo.php?idFilme=" + item.id
 
 					let img = document.createElement('img');
 					img.className = "item round float-left";
-					img.src = 'https://image.tmdb.org/t/p/original' + item.poster_path;
+					img.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 					console.log(item.poster_path);
 
 					a.appendChild(img);

@@ -13,8 +13,10 @@
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style_principal.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="icon" href="http://localhost/mistermoveis/img/favicon.ico" sizes="32x32">
 	<meta charset="utf-8">
 	 <link rel="stylesheet" type="text/css" href="../fontawesome/css/all.css">
+	 <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body onload="getIdFilmes()">
 	<!-- Colocando os ID dos filmes dentro do value -->
@@ -25,8 +27,10 @@
 		<p><?=$vazia ?></p>
 		<div id="listFilmes" class="row text-left align-middle d-flex justify-content-left ml-2 mr-2">	
 		</div>
+
 	</div>
 
+	<? include "../php/footer.php"?>
 
 
 	<script src="../js/ancora.js"></script>

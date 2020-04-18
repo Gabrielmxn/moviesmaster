@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
   <head>
+    <link rel="icon" href="http://localhost/mistermoveis/img/favicon.ico" sizes="32x32">
     <meta charset="utf-8" />
     <title>MisterMovies Equipe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />

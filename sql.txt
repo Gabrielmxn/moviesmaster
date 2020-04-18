@@ -1,0 +1,34 @@
+CREATE DATABASE mistermoveis;
+
+
+CREATE TABLE usuario(
+	idUsuario INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+	nome varchar(200) NOT NULL,
+	senha varchar(200) NOT NULL
+);
+
+
+CREATE TABLE status(
+	idStatus INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	status varchar(200) NOT NULL
+);
+
+CREATE TABLE filmes(
+	idFilmes INT NOT NULL PRIMARY KEY,
+	nome varchar(200) NOT NULL
+);
+
+
+CREATE TABLE usuario_filmes(
+	idFilmes INT NOT NULL,
+	idUsuario INT NOT NULL,
+	idStatus INT NOT NULL,
+	FOREIGN KEY(idStatus) REFERENCES status(idStatus),  
+	FOREIGN KEY(idFilmes) REFERENCES filmes(idFilmes ),
+	FOREIGN KEY(idUsuario) REFERENCES usuario(idUsuario)
+);
+
+INSERT INTO status(status)values("Visto");
+INSERT INTO status(status)values("NãoVisto");
+
+	

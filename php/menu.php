@@ -1,5 +1,5 @@
 <?php
-
+  
 
 ?>
 
@@ -35,10 +35,10 @@
           <div class="dropdown-menu dropdown-menu-right dropdown-default"
             aria-labelledby="navbarDropdownMenuLink-333">
             <p class="dropdown-item"><?= $logado ?></p>
-            <a class="dropdown-item" href="#">Trocar senha</a> <!-- após o login -->
+            <a class="dropdown-item" href="trocarSenhaUsuario.php">Trocar senha</a> <!-- após o login -->
             <a class="dropdown-item" href="listaFilmes.php">Lista</a> <!-- após o login -->
-              <a class="dropdown-item" href="../php/encerrar.php?logout=1">Encerrar</a>
-           <!-- <a class="dropdown-item" href="equipe.php">Equipe</a> --> <!-- vai ficar no footer -->
+            <a class="dropdown-item" href="../php/encerrar.php?logout=1">Encerrar</a>
+           
           </div>
         </li>
       </ul>

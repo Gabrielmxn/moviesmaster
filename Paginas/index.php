@@ -9,12 +9,14 @@ include "../php/carousel.php";
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>MisterMoveis</title>
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style_principal.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta charset="utf-8">
+	<link rel="icon" href="http://localhost/mistermoveis/img/favicon.ico" sizes="32x32">
  	<link rel="stylesheet" type="text/css" href="../fontawesome/css/all.css">
+ 	 <link rel="stylesheet" href="../css/footer.css">
 	
 </head>
 <body onload="getFilmesPopulares(); getFilmesMaisClassificados(); getFilmesCinemas();">
@@ -30,13 +32,12 @@ include "../php/carousel.php";
 			
 		</div>
 		<h3 class="ml-3">Próximos nos cinemas</h3>
-		<div  class="row text-center align-middle d-flex justify-content-left ml-2 mr-2" id="listaNosCinemas">	
-			
+		<div  class=" borde row text-center align-middle d-flex justify-content-left ml-2 mr-2" id="listaNosCinemas">	
 		</div>
-
+		<br><br>
 	</div>
 
-
+	<? include "../php/footer.php"?>
 	<script src="../js/ajaxFilmesPopulares.js"></script>
 	<script src="../js/ancora.js"></script>
 	<script src="../js/ajaxFilmesMaisClassificados.js"></script>

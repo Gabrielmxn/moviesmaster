@@ -2,10 +2,7 @@
 <?php
 	
 	session_start();
-	
 	if(!empty($_POST['usuario']) && !empty($_POST['senha'])){
-		$login = $_POST['usuario'];
-		$senha = $_POST['senha'];
 		$dsn = "mysql:host=localhost;dbname=mistermoveis";
 		$usuario = "root";
 		$senha = '';
@@ -26,6 +23,9 @@
 			echo "<pre>";
 			print_r($resultado);
 			echo "</pre>";
+			echo 'teste';
+			
+			
 			if($resultado == ""){
 				unset ($_SESSION['id']);
 				unset ($_SESSION['login']);
@@ -34,8 +34,8 @@
 			}else{
 				echo "não foi";
 				$_SESSION['id'] = $resultado['idUsuario'];
-				$_SESSION['login'] = $login;
-				$_SESSION['senha'] = $senha;
+				$_SESSION['login'] = $_POST['usuario'];
+				$_SESSION['senha'] = $_POST['senha'];
 				header('location:../Paginas/index.php');
 			}
 		}
@@ -43,6 +43,12 @@
 		catch(PDOExpeption $e){
 			
 		}
+	}
+	else {
+			unset ($_SESSION['id']);
+			unset ($_SESSION['login']);
+			unset ($_SESSION['senha']);
+			header('location:../Paginas/login.php');
 	}
 
 

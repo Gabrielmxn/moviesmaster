@@ -33,14 +33,15 @@ function getFilmesCinemas() {
 				let jsonFilmes = JSON.parse(XMLFilmes)
 				console.log("aqui")
 				console.log(jsonFilmes)
+				if(jsonFilmes !== ""){
 				for(let i = 0; i <= 8; i++){	
 					let item = jsonFilmes['results'][i]
 					var a = document.createElement('a');
 					var img = document.createElement('img');
 					if(typeof item !== 'undefined'){
-						a.href = "listaGet.php?idFilme=" + item.id;
+						a.href = "filmeInfo.php?idFilme=" + item.id;
 						img.className = "item round float-left";
-						img.src = 'https://image.tmdb.org/t/p/original' + item.poster_path;
+						img.src = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
 					}
 					
 				
@@ -51,8 +52,12 @@ function getFilmesCinemas() {
 
 					//Adicionando a árvore a cima para ser filha da div com id = lista
 					document.getElementById('listaNosCinemas').appendChild(a);
-			
+				}
 			}
+				else {
+					document.getElementById("mensagem").innerHTML = "Não existe filmes próximos nos cinemas";
+				}
+			
 
 			//Tratamento do erro 401/404
 			if(xmlHttp.readyState == 4 & xmlHttp.status == 401 || xmlHttp.status == 404){

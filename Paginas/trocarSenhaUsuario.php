@@ -1,24 +1,30 @@
-<?php
+<?php 
+	include "../php/sessao.php";
+ // include "../php/erros.php";
+  $erro = "";
 
-session_start();
-if((isset ($_SESSION['login']) == true) and (isset ($_SESSION['senha']) == true))
-{
-  header('location:index.php');
- 
-  }
-
- 
+    if($_GET){
+      if($_GET['erro'] == "nerro"){
+        $erro = "Você deve digitar a mesma senha duas vezes para confirmá-la.";
+        echo 'entrou aqui';
+      }
+      else if ($_GET['erro'] == "serro"){
+        $erro = "Sua senha está incorreta.";
+        
+      }
+}
 
 ?>
+
 
 
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <title>MisterMoveis - Login</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="http://localhost/mistermoveis/img/favicon.ico" sizes="32x32">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="../css/loginStyle.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap"
@@ -31,7 +37,7 @@ if((isset ($_SESSION['login']) == true) and (isset ($_SESSION['senha']) == true)
     <title>MoviesMaster Login</title>
   </head>
   <body>
-    <form action="../php/autenticacao.php" method="post" class="login-form">
+    <form action="../php/trocaSenha.php" method="post" class="login-form">
       <!-- Título -->
      <a href="index.php"> <img src="../img/fundo7.svg" width="120" height="120" class="rounded mx-auto d-block"></a>
       <!-- Fim Título -->
@@ -40,31 +46,20 @@ if((isset ($_SESSION['login']) == true) and (isset ($_SESSION['senha']) == true)
 
       <!-- Username -->
       <div class="txtb">
-        <input type="text" name="usuario" />
-        <span data-placeholder="Login"></span>
+        <input type="password" name="senhaUsuario" />
+        <span data-placeholder="Digite sua senha"></span>
       </div>
-      <!-- Fim Username -->
-
-      <!-- ##### ##### ##### ##### ##### ##### -->
-
-      <!-- Senha -->
       <div class="txtb">
-        <input type="password" name="senha"/>
-        <span data-placeholder="Senha"></span>
+        <input type="password" name="novasenha1" />
+        <span data-placeholder="Digite sua nova senha"></span>
       </div>
-      <!-- Fim Senha -->
+      <div class="txtb">
+        <input type="password" name="novasenha2" />
+        <span data-placeholder="Digite novamente sua nova senha"></span>
+      </div>
 
-      <!-- ##### ##### ##### ##### ##### ##### -->
-
-      <!-- Botão Logar -->
-      <input type="submit" class="logbtn" value="Login" />
-      <!-- Fim Botão Logar -->
-
-      <!-- ##### ##### ##### ##### ##### ##### -->
-
-      <!-- Texto para cadastro -->
-      <div class="bottom-text">Não tem nenhuma conta? <a href="cadastro.php" class="text-primary">Criar conta</a></div>
-      <!-- Fim Texto para cadastro -->
+      <input type="submit" class="logbtn" value="Trocar" />
+      <p class="mt-3 text-danger text-center "><?= $erro ?></p>
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">

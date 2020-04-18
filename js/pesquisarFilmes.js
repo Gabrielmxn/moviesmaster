@@ -19,7 +19,7 @@ function getIdFilmes() {
 				let m = ""
 				//Criando uma coluna para outras informações
 				let a = document.createElement('a');
-				a.href = "listaGet.php?idFilme=" + resultado[i];
+				a.href = "filmeInfo.php?idFilme=" + resultado[i];
 
 				let img = document.createElement('img')
 				img.className = "item round float-left";

@@ -11,6 +11,7 @@ if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == tru
  
 $logado = $_SESSION['login'];
 $id = $_SESSION['id'];
+$senha = $_SESSION['senha'];
 
 
 
