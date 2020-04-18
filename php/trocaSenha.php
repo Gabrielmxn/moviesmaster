@@ -8,7 +8,7 @@
   	try {
   		if($_POST['novasenha1'] === $_POST['novasenha2'] && $_POST['novasenha1'] !== "" && $_POST['novasenha2'] !== ""){
   			echo "nova senha correta";
-			$dsn = "mysql:host=localhost;dbname=mistermoveis";
+			$dsn = "mysql:host=localhost;dbname=mistermovie";
 			$usuario = "root";
 			$senha = '';
 

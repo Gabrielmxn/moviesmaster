@@ -14,7 +14,7 @@ include "../php/carousel.php";
 	<link rel="stylesheet" href="../css/style_principal.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta charset="utf-8">
-	<link rel="icon" href="http://localhost/mistermoveis/img/favicon.ico" sizes="32x32">
+	<link rel="icon" href="http://localhost/mistermovie/img/favicon.ico" sizes="32x32">
  	<link rel="stylesheet" type="text/css" href="../fontawesome/css/all.css">
  	 <link rel="stylesheet" href="../css/footer.css">
 	

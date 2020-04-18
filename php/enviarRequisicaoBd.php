@@ -6,7 +6,7 @@
 
   	try {
   			
-			$dsn = "mysql:host=localhost;dbname=mistermoveis";
+			$dsn = "mysql:host=localhost;dbname=mistermovie";
 			$usuario = "root";
 			$senha = '';
 
@@ -25,9 +25,7 @@
 
 			if($resultado === 0){
 				echo "Filme não está na sua lista";
-				$dsn = "mysql:host=localhost;dbname=mistermoveis";
-				$usuario = "root";
-				$senha = '';
+				
 				$conexao = new PDO($dsn, $usuario, $senha);
 				
 			

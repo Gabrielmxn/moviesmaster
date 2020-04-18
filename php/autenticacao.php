@@ -3,9 +3,10 @@
 	
 	session_start();
 	if(!empty($_POST['usuario']) && !empty($_POST['senha'])){
-		$dsn = "mysql:host=localhost;dbname=mistermoveis";
-		$usuario = "root";
-		$senha = '';
+			$dsn = "mysql:host=localhost;dbname=mistermovie";
+			$usuario = "root";
+			$senha = '';
+
 
 		try {
 			$conexao = new PDO($dsn, $usuario, $senha);

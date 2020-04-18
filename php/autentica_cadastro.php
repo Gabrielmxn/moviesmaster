@@ -6,7 +6,7 @@
 
 
   	try {
-			$dsn = "mysql:host=localhost;dbname=mistermoveis";
+			$dsn = "mysql:host=localhost;dbname=mistermovie";
 			$usuario = "root";
 			$senha = '';
 

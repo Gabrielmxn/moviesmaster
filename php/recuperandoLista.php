@@ -1,8 +1,9 @@
 <?php 
-	$dsn = "mysql:host=localhost;dbname=mistermoveis";
+	$dsn = "mysql:host=localhost;dbname=mistermovie";
 	$usuario = "root";
 	$senha = '';
-	$filmes = '';
+	$filmes = " ";
+
 	try {
 		$conexao = new PDO($dsn, $usuario, $senha);
 
