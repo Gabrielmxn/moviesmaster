@@ -1,4 +1,5 @@
-# moviesmaster
+# MisterMovies
+
 ## Projeto de Metodologias Ágeis
 Projeto criado como Atividade Prática Supervisionada 1 para a matéria de Metodologias Ágeis do Curso de Ciência da Computação da UNISUAM.
 
