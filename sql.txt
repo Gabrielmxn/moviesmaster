@@ -36,12 +36,5 @@ CREATE TABLE usuario_interesse(
 	FOREIGN KEY(idUsuario) REFERENCES usuario(idUsuario)
 );
 
-INSERT INTO usuario(nome, senha)values("Beatris", "12345");
 
-INSERT INTO filmes(idFilmes, nome)values(514847, "A Caçada");
-
-INSERT INTO status(status)values("Visto");
-INSERT INTO status(status)values("NãoVisto");
-
-INSERT INTO usuario_filmes(idFilmes, idUsuario, idStatus)values(514847,1,1);
 	
