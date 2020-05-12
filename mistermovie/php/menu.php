@@ -27,8 +27,10 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-default"
             aria-labelledby="navbarDropdownMenuLink-333">
           <p class="dropdown-item"><?=$logado?></p>
-          <a class="dropdown-item" href="trocarSenhaUsuario.php">Trocar senha</a> <!-- após o login -->
-          <a class="dropdown-item" href="mistermovies_controller.php?controle=3">Lista</a> <!-- após o login -->
+          <a class="dropdown-item" href="trocarSenhaUsuario.php">Trocar senha</a> 
+          <a class="dropdown-item" href="mistermovies_controller.php?controle=3">Lista de filmes</a>
+          <a class="dropdown-item" href="mistermovies_controller.php?controle=2">Lista de interesses</a>
+           <a class="dropdown-item" href="mistermovies_controller.php?controle=1">Favoritos</a> 
           <a class="dropdown-item" href="mistermovies_controller.php?controle=7">Encerrar</a>
         </div>
       </li>

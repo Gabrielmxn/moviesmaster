@@ -52,15 +52,18 @@ function getFilmesPrincipais() {
 }
 
 //RECUPERAR TODOS OS FILMES DE PESQUISA
-function getPesquisaFilmes(h) {
+function getPesquisaFilmes() {
 	let nomeDoFilme = document.getElementById("pesquisar").value
+
+	let valorPagina = $('#paginaPesquisar').val()
+	var maximoPagina = " ";
 	//buscar  API
-	if(h != undefined){
+	/*if(h != undefined){
 		$('#listaPesquisa').empty();
 
-	}
+	}*/document.title = nomeDoFilme + " - MisterMovie"
 		let xmlHttp = new XMLHttpRequest();
-		xmlHttp.open('GET', 'https://api.themoviedb.org/3/search/movie?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BRS&query=' + nomeDoFilme + '&page=' + h +'&include_adult=false');
+		xmlHttp.open('GET', 'https://api.themoviedb.org/3/search/movie?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BRS&query=' + nomeDoFilme + '&page=' + valorPagina +'&include_adult=false');
 		//Pecorrendo o array xmlHttp
 		xmlHttp.onreadystatechange = () => {
 			//verificando o status e o state da API.
@@ -68,9 +71,7 @@ function getPesquisaFilmes(h) {
 				//Criando um objeto com o response do json
 				let XMLFilmes = xmlHttp.responseText; 
 				let jsonFilmes = JSON.parse(XMLFilmes);
-				if(jsonFilmes['results'].length === 0){
-					$('#mensagemVazia').html('Nenhum filme foi encontado.');
-				}
+				var maximoPagina = jsonFilmes.total_pages
 				for(let i in jsonFilmes['results']){
 					let item = 	jsonFilmes['results'][i]
 					let a = document.createElement('a');
@@ -82,24 +83,43 @@ function getPesquisaFilmes(h) {
 						img.src = "https://image.tmdb.org/t/p/original" + item.poster_path
 						//Criando a árvore do DOM
 						a.appendChild(img);
-						document.getElementById('listaPesquisa').appendChild(a);
+						$('#listaPesquisa').append(a);
 					}		
 				}
+				if(valorPagina < maximoPagina ){
+					console.log('entrou no if')
+					let paginaInt = parseInt(valorPagina);
+					console.log(paginaInt)
+					let pagina = paginaInt + 1;
+					$('#paginaPesquisar').val('')
+					$('#paginaPesquisar').val(pagina)
+				}else {
+					console.log(jsonFilmes.results.length)
+					if(jsonFilmes.results.length === 0){
+						$('#mensagemVazia').html('Nenhum filme encontrado.')
+						$('#botaoMostrarMais').removeClass('d-block')
+						$('#botaoMostrarMais').addClass('d-none')
+					}
+					$('#botaoMostrarMais').attr('disabled', true);
+				}		
 			}
 			//Tratamento do erro 401/404
 			if(xmlHttp.readyState == 4 & xmlHttp.status == 401 || xmlHttp.status == 404){
 			//mensagem de erro	
 			}
 		}
+		
 		//enviado a requisição
 		xmlHttp.send();
 	}
 
 //RECUPERAR FILMES PELO KEY
 function obterFilmesPalavraChave(palavraChave) {
-	for(let h = 1; h <= 3; h++){
+		let valorPagina = $('#paginaPesquisar').val()
+		var maximoPagina = " ";
+		console.log('key')
 		let xmlHttp = new XMLHttpRequest();
-		xmlHttp.open('GET', 'https://api.themoviedb.org/3/keyword/' + palavraChave + '/movies?api_key=bd9f051458a4c87fe4c873ef463542e3&page=' + h +'language=pt-BR&include_adult=false');
+		xmlHttp.open('GET', 'https://api.themoviedb.org/3/keyword/' + palavraChave + '/movies?api_key=bd9f051458a4c87fe4c873ef463542e3&page=' + valorPagina +'language=pt-BR&include_adult=false');
 		//Pecorrendo o array xmlHttp
 		xmlHttp.onreadystatechange = () => {
 			//verificando o status e o state da API.
@@ -109,8 +129,14 @@ function obterFilmesPalavraChave(palavraChave) {
 				let jsonFilmes = JSON.parse(XMLFilmes);
 				//tamanho = jsonFilmes.total_pages
 				//Criando uma coluna para outras informações
+
+				var maximoPagina = jsonFilmes.total_pages
+				console.log(maximoPagina)
 				for(let i in jsonFilmes['results']){
 					let item = 	jsonFilmes['results'][i]
+					if(jsonFilmes['results'][i].length == 0){
+						$('#botaoMostrarMais').addClass('d-none')
+					}
 					let a = document.createElement('a');
 					let img = document.createElement('img')
 					if(item.poster_path !== null){
@@ -122,47 +148,75 @@ function obterFilmesPalavraChave(palavraChave) {
 						a.appendChild(img);
 						document.getElementById('listaPesquisa').appendChild(a);
 					}	
+				}
+				if(valorPagina < maximoPagina){
+					console.log('entrou no if')
+					let paginaInt = parseInt(valorPagina);
+					console.log(paginaInt)
+					let pagina = paginaInt + 1;
+					$('#paginaPesquisar').val('')
+					$('#paginaPesquisar').val(pagina)
+				}else {
+					$('#botaoMostrarMais').attr('disabled', true);
 				}		
 			}
 			//Tratamento do erro 401/404
 			else if(xmlHttp.readyState == 4 & xmlHttp.status == 401 || xmlHttp.status == 404){		
 		}
 	}
+	
+		
+		
 		//enviado a requisição
 		xmlHttp.send();
 	}
-}
+
 
 function getIdFilmes() {
 	let idDoFilme = document.getElementById("valor").value
 	let transformandoIdDoFilmeArray = idDoFilme.split(" ");
-	for(let i in transformandoIdDoFilmeArray){
-	let xmlHttp = new XMLHttpRequest();
-	//buscar  API
-	xmlHttp.open('GET', 'https://api.themoviedb.org/3/movie/' + transformandoIdDoFilmeArray[i] + '?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BR');
-	//Pecorrendo o array xmlHttp
-		xmlHttp.onreadystatechange = () => {
-			//verificando o status e o state da API.
-			if(xmlHttp.readyState == 4 & xmlHttp.status == 200){			
-				//Criando um objeto com o response do json
-				let XMLFilmes = xmlHttp.responseText; 
-				let jsonFilmes = JSON.parse(XMLFilmes);
-				//Criando uma coluna para outras informações
-				let a = document.createElement('a');
-				a.href = "mistermovies_controller.php?idFilme=" + transformandoIdDoFilmeArray[i] + "&controle=9"
-                a.id = "filme";
-				let img = document.createElement('img')
-				img.className = "item round float-left mx-1 my-1 my-sm-1 mx-sm-1 my-md-3 mx-md-2";
-				img.src = "https://image.tmdb.org/t/p/original" + jsonFilmes.poster_path
-				//Criando a árvore do DOM
-				a.appendChild(img);
-				document.getElementById('listFilmes').appendChild(a);
+	let variavelPagQuant = $('#pagQuant').val();
+	variavelPagQuant = parseInt(variavelPagQuant);
+	let maximoFilmes = 20 + variavelPagQuant;
+	let minimoFilmes = 0 + variavelPagQuant;
+	console.log(transformandoIdDoFilmeArray)
+	console.log("Tamanho do array: " + transformandoIdDoFilmeArray.length)
+	//for(let i in transformandoIdDoFilmeArray){
+	for(let i = minimoFilmes; i < maximoFilmes; i++){	
+	if(i <= transformandoIdDoFilmeArray.length){	
+		let xmlHttp = new XMLHttpRequest();
+		//buscar  API
+		xmlHttp.open('GET', 'https://api.themoviedb.org/3/movie/' + transformandoIdDoFilmeArray[i] + '?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BR');
+		//Pecorrendo o array xmlHttp
+			xmlHttp.onreadystatechange = () => {
+				//verificando o status e o state da API.
+				if(xmlHttp.readyState == 4 & xmlHttp.status == 200){			
+					//Criando um objeto com o response do json
+					let XMLFilmes = xmlHttp.responseText; 
+					let jsonFilmes = JSON.parse(XMLFilmes);
+					//Criando uma coluna para outras informações
+					let a = document.createElement('a');
+					a.href = "mistermovies_controller.php?idFilme=" + transformandoIdDoFilmeArray[i] + "&controle=9"
+	                a.id = "filme";
+					let img = document.createElement('img')
+					img.className = "item round float-left mx-1 my-1 my-sm-1 mx-sm-1 my-md-3 mx-md-2";
+					img.src = "https://image.tmdb.org/t/p/original" + jsonFilmes.poster_path
+					//Criando a árvore do DOM
+					a.appendChild(img);
+					document.getElementById('listFilmes').appendChild(a);
+				}
+				//Tratamento do erro 401/404
+				if(xmlHttp.readyState == 4 & xmlHttp.status == 401 || xmlHttp.status == 404){	
 			}
-			//Tratamento do erro 401/404
-			if(xmlHttp.readyState == 4 & xmlHttp.status == 401 || xmlHttp.status == 404){	
 		}
+
+		//enviado a requisição
+		xmlHttp.send();
+	}else{
+		$('#botaoMostrarMaisLista').attr('disabled', true);
 	}
-	//enviado a requisição
-	xmlHttp.send();
 	}
+	let quantTotal = variavelPagQuant + 20;
+	$('#pagQuant').val('');
+	$('#pagQuant').val(quantTotal);
 }

@@ -1,3 +1,21 @@
+$(document).ready( () => {
+	$(window).resize( e => {
+		var tamanhoDaTela = $(window).width();
+		var urlImagem = $('#inputImagem').val()
+			if(tamanhoDaTela <= 991){
+				$('#lista').css('background', '');
+			}else if(tamanhoDaTela >= 992 && tamanhoDaTela <= 1050){
+				
+				$('#lista').css('background', 'url(' + urlImagem + ') no-repeat').css('backgroundPosition', 'center center').css('backgroundSize', 'cover');
+			}else if(tamanhoDaTela > 1050){
+				$('#lista').css('background', 'url(' + urlImagem + ') no-repeat').css('backgroundPosition', 'center center').css('backgroundSize', 'cover');
+			}	
+	})
+})
+
+
+
+
 function enviarFilmes(){
 	if($('#listaVerificar').val()  == 'true'){
 		$('#listaVerificar').val('false')
@@ -8,26 +26,30 @@ function enviarFilmes(){
 	}
 }
 
+function enviarFilmesFavoritos(){
+	if($('#listaVerificarFavoritos').val()  == 'true'){
+		$('#listaVerificarFavoritos').val('false')
+		$('#botaoFavoritos').html("<i class='fas fa-heart text-white'></i>")
+	}else if($('#listaVerificarFavoritos').val() == 'false') {
+		$('#listaVerificarFavoritos').val('true')
+		$('#botaoFavoritos').html("<i class='fas fa-heart text-danger'></i>")
+	}
+}
+function enviarFilmesInteresses(){
+	if($('#listaVerificarInteresses').val()  == 'true'){
+		$('#listaVerificarInteresses').val('false')
+		$('#botaoInteresses').html("<i class='fas fa-bookmark text-white'></i>")
+	}else if($('#listaVerificarInteresses').val() == 'false') {
+		$('#listaVerificarInteresses').val('true')
+		$('#botaoInteresses').html("<i class='fas fa-bookmark text-danger'></i>")
+	}
+}
+
 function getDoFilmes() {
 	let idDoFilme = $('#valor').val();
-	var recuperarIdGenero = [];
 	//array de meses
-	var meses = [
-	  "janeiro",
-	  "fevereiro",
-	  "março",
-	  "abril",
-	  "maio",
-	  "junho",
-	  "julho",
-	  "agosto",
-	  "setembro",
-	  "outubro",
-	  "novembro",
-	  "dezembro"
-	];
-	let xmlHttp = [];
-	xmlHttp = new XMLHttpRequest();
+	
+	let xmlHttp = new XMLHttpRequest();
 	//buscar  API
 	xmlHttp.open('GET', 'https://api.themoviedb.org/3/movie/' + idDoFilme + '?api_key=bd9f051458a4c87fe4c873ef463542e3&language=pt-BR');
 		//Pecorrendo o array xmlHttp
@@ -37,48 +59,55 @@ function getDoFilmes() {
 				let elemento = document.getElementById("lista");
 				//Criando um objeto com o response do json
 				let XMLFilmes = xmlHttp.responseText; 
-				let jsonFilmes = JSON.parse(XMLFilmes)
-				//pecorrendo o objeto e recuperando os seus valores.
-				let item = jsonFilmes
+				let item = JSON.parse(XMLFilmes)
 				//criando uma linha (boostrap - grid)
 				let divRow = document.createElement('div');
-				let background = item.backdrop_path;
-				divRow.className = 'row mt-0 p-0';
+				divRow.className = 'row';
 				//criando uma coluna (bootstrap - grid) para colocar a imagem
 				let divCol2 = document.createElement('div');
-				divCol2.className = 'col-12 col-sm-12  col-lg-3 p-0 m-0 align-self-center img' 
+				divCol2.className = 'col-sm-12  col-lg-3 p-0 m-0 align-self-center img ' 
 				divCol2.id = "coluna";
 
 				//Criando uma coluna para outras informações
 				let divCol = document.createElement('div');
-				divCol.className = 'col-12 col-sm-12 col-lg-9 align-self-center'
-
-				//Titulo do filme
-				let p1 = document.createElement('p')
-				p1.innerHTML = "<strong id=titulo>" + item.title + "</strong> " 
-				p1.className = "h2 text-center"
-				
+				divCol.className = ' col-sm-12 col-lg-9 align-self-center'
+			
 				//resumo do filme
 				let p2 = document.createElement('p')
-				p2.className = "clear";
 				if(item.overview){
-					p2.innerHTML = '<strong>Sinopse</strong> <br> <span id=sinopse>' + item.overview + '</span>'
+					p2.innerHTML = '<h5>Sinopse</h5><p id=sinopse>' + item.overview + '</p>'
 				}
 				else {
-					p2.innerHTML = '<strong>Sinopse</strong>  <br> <span id=sinopse> Não temos uma sinopse em Português do Brasil. Você pode ajudar a ampliar o nosso banco de dados adicionando uma.</span>'
+					p2.innerHTML = '<h5>Sinopse</h5><p id=sinopse> Não temos uma sinopse em disponível.</p>'
 				}
+				let p3 = document.createElement('p');
+				p3.innerHTML = item.tagline;
+				p3.className = "font-italic";
 
+				let p6 = document.createElement('p');
+				let horaDoFilme = item.runtime;
+				let horaDoFilmes = horaDoFilme/60
+				horaDoFilmes = horaDoFilmes.toString() 
+				let hora = horaDoFilmes.split(".");
+				let valorConta = hora[0] * 60
+				var stringHora = ""
+
+				if(horaDoFilme != 0 && horaDoFilme != null){
+					var stringHora =  '<i class="far fa-clock"></i> ' + hora[0] + "h " + (horaDoFilme - valorConta) + 'min'
+				}
+				
 				//gênero do filme
 				let generos = ""
-				for(let g in jsonFilmes.genres){
-					//console.log("Estou dentro do Genero");
+				for(let g in item.genres){
 					if(generos){
 						generos += ", "
 					}
-					generos += jsonFilmes.genres[g].name	
+					generos += item.genres[g].name	
 				}
-				let p3 = document.createElement('p')
-				p3.innerHTML = "<strong>Gênero</strong><br><span> " + generos + "</span>"
+				let generoVariavel = ""
+				if(generos != ""){
+				 generoVariavel = '<i class="fas fa-film"></i> ' +  generos + '</i>'
+				}
 				//data de lançamento
 				let p5 = document.createElement('p')
 				let datadelancamento = item.release_date;
@@ -86,63 +115,50 @@ function getDoFilmes() {
 				let ano = datadelancamento.substr(0, 4);
 				let mes = datadelancamento.substr(5, 2);
 				let dia = datadelancamento.substr(8, 2);
-				if(mes){
-					mes = meses[mes-1]
+				let anoLacamento = ""
+				if(ano != ""){
+					anoLacamento = '(' + ano + ')'
 				}
-				p5.innerHTML = '<strong>Data de lançamento</strong><br> <span id=data>' +  dia + ' de ' + mes + '  ' + ano + '</span>'
-				let hr = document.createElement('hr')
+				
+				let lacamento = ""; 
+				if(datadelancamento != ""){
+					lacamento = '<i class="fas fa-calendar-day fa-1x"></i> ' + dia + '/' + mes + '/' + ano
+				}
+				p5.className = "text-center";
+				p5.innerHTML = '<span id="lacamento">' + lacamento +  ' </span><span id="genero">' + generoVariavel + ' </span><span id="hora">' + stringHora + '</span>'
+				
+				document.title = item.title + " - MisterMovie"
+				//Titulo do filme
+				let p1 = document.createElement('p')
+				p1.innerHTML = "<strong id=titulo>" + item.title + ' ' + anoLacamento + "</strong> " 
+				p1.className = "h2 text-center"
 				//recuperando o poster/imagem do filme
 				let img = document.createElement('img')
-				//console.log("Tamanho da tela: " + tamanhoDaTela)
-				//valores da largura da tela maior que 768
+				
 				
 				img.src = "https://image.tmdb.org/t/p/w500" + item.poster_path
 				img.className = "img-fluid rounded mx-auto d-block"
 				var width = screen.width;
-				if(width <= 766){
-					elemento.className = "container-fluid"
+				if(width <= 1050){
 					elemento.style.background = "";
 					elemento.style.backgroundPosition = '';
 					elemento.style.backgroundSize = "";
-
-				}
-				else if(width >= 766 && width <= 1050) {
-					elemento.className = "container-fluid"
-					elemento.style.background = "url(https://image.tmdb.org/t/p/original/" + item.backdrop_path + ") no-repeat";
-					elemento.style.backgroundPosition = 'center center';
-					elemento.style.backgroundSize = "cover";
-					//elemento.style.backgroundSize = "100% 100%";
 				}
 				else if(width > 1050) {
-					elemento.className = "container-fluid"
 					elemento.style.background = "url(https://image.tmdb.org/t/p/original/" + item.backdrop_path + ") no-repeat";
 					elemento.style.backgroundPosition = 'center right';
-					elemento.style.backgroundSize = "80% 100%";
-					//elemento.style.backgroundSize = "100% 100%";
+					elemento.style.backgroundSize = "100%";
 				}
 				
-				//adicionando um hidden para enviar o ID do FILME
+				let inputImagem = document.createElement('input')
+				inputImagem.id = "inputImagem";
+				inputImagem.value = "https://image.tmdb.org/t/p/original/" + item.backdrop_path;
+				inputImagem.type = "hidden";
+				
 				let idFilme = document.createElement('input');
 				idFilme.id = "idFilme";
 				idFilme.value = item.id;
 				idFilme.type = "hidden";
-
-				//adicionando um hidden para enviar o ID do genero
-				let  idGeneroTe = document.createElement('input');
-				idGeneroTe.value = recuperarIdGenero;
-				idGeneroTe.type = "hidden";
-
-				//adicionando um hidden para enviar o nome do backdrop
-				let backdrop = document.createElement('input');
-				backdrop.id = "backdrop";
-				backdrop.value = item.backdrop_path;
-				backdrop.type = "hidden";
-
-				//adicionando um hidden para enviar o nome do poster
-				let poster = document.createElement('input');
-				poster.id = "poster";
-				poster.value = item.poster_path;
-				poster.type = "hidden";
 
 				let ul = document.createElement('ul');
 				ul.className = 'nav';
@@ -151,50 +167,75 @@ function getDoFilmes() {
 				liFavoritos.className = "nav-item";
 				liFavoritos.title = 'Adicionar aos favoritos';
 
+				let liInteresse = document.createElement('li');
+				liInteresse.className = "nav-item";
+				liInteresse.title = 'Adicionar aos interesse';
+
 				let liLista = document.createElement('li');
 				liLista.className = "nav-item";
 				liLista.title = 'Adicionar à sua lista';
 
-				/*let liInteresse = document.createElement('li');
-				liInteresse.className = "nav-item";
-				liInteresse.title = 'Adicionar à sua lista de interesse';*/
-
+				
 				let liAvaliacao = document.createElement('li');
 				liAvaliacao.className = "nav-item";
 				liAvaliacao.title = 'Avaliação!';
 
-	            let botao1 = document.createElement('button');
-				botao1.id = "botao";
-	            botao1.disabled = "true";
-				botao1.className = "btnw btn my-3 ml-3 float-left"
-				botao1.innerHTML = "<i class='fas fa-heart text-white'></i>";
+	            let botaoFavoritos = document.createElement('button');
+				botaoFavoritos.id = "botaoFavoritos";
+				botaoFavoritos.className = "btnw btn my-3 ml-3 float-left"
 				
-				//adicionando o botão para enviar os filmes para lista 
-				let botao = document.createElement('button');
-				botao.id = "botaoLista";
-				botao.className = "btnw btn my-3 ml-3 float-left"
 				if(document.getElementById('idUsuario').value == "deslogado"){
-					botao.innerHTML = "<i class='fas fa-list text-white'></i>"
-				 	botao.disabled = "true";
-				 	console.log("Aqui no if");
+					botaoFavoritos.innerHTML = "<i class='fas fa-heart text-white'></i>"
+				 	botaoFavoritos.disabled = "true";
+				 	
 				}else {
-					console.log("Aqui no else");
-					if(document.getElementById('listaVerificar').value == 'true'){
-						botao.innerHTML = "<i class='fas fa-list text-danger'></i>"
-					}else if(document.getElementById('listaVerificar').value == 'false'){
-						botao.innerHTML = "<i class='fas fa-list text-white'></i>"
+					if(document.getElementById('listaVerificarFavoritos').value == 'true'){
+						botaoFavoritos.innerHTML = "<i class='fas fa-heart text-danger'></i>"
+					}else if(document.getElementById('listaVerificarFavoritos').value == 'false'){
+						botaoFavoritos.innerHTML = "<i class='fas fa-heart text-white'></i>"
 					}
 				}
-				botao.onclick = function() {enviar(); enviarFilmes();}
 
-				let botao2 = document.createElement('button');
-				botao2.id = "botao";
-	            botao2.disabled = "true";
-				botao2.className = "btnw btn my-3 ml-3 float-left"
-				botao2.innerHTML = "<i class='fas fa-star text-white'></i>";
-	            
-
+				botaoFavoritos.onclick = function() {enviar('listaFilmesFavoritos'); enviarFilmesFavoritos();}
 				
+				let botaoListaFilmes = document.createElement('button');
+				botaoListaFilmes.id = "botaoLista";
+				botaoListaFilmes.className = "btnw btn my-3 ml-3 float-left"
+				if(document.getElementById('idUsuario').value == "deslogado"){
+					botaoListaFilmes.innerHTML = "<i class='fas fa-list text-white'></i>"
+				 	botaoListaFilmes.disabled = "true";
+				 	
+				}else {
+				
+					if(document.getElementById('listaVerificar').value == 'true'){
+						botaoListaFilmes.innerHTML = "<i class='fas fa-list text-danger'></i>"
+					}else if(document.getElementById('listaVerificar').value == 'false'){
+						botaoListaFilmes.innerHTML = "<i class='fas fa-list text-white'></i>"
+					}
+				}
+				botaoListaFilmes.onclick = function() {enviar('listaFilmes'); enviarFilmes();}
+	            
+				let botaoInteresses = document.createElement('button');
+				botaoInteresses.id = "botaoInteresses";
+				botaoInteresses.className = "btnw btn my-3 ml-3 float-left"
+				if(document.getElementById('idUsuario').value == "deslogado"){
+					botaoInteresses.innerHTML = "<i class='fas fa-bookmark text-white'></i>"
+				 	botaoInteresses.disabled = "true";
+				}else {
+					
+					if(document.getElementById('listaVerificarInteresses').value == 'true'){
+						botaoInteresses.innerHTML = "<i class='fas fa-bookmark text-danger'></i>"
+					}else if(document.getElementById('listaVerificarInteresses').value == 'false'){
+						botaoInteresses.innerHTML = "<i class='fas fa-bookmark text-white'></i>"
+					}
+				}
+				botaoInteresses.onclick = function() {enviar('listaFilmesInteresses'); enviarFilmesInteresses();}
+
+				let botaoAvaliacao = document.createElement('button');
+				botaoAvaliacao.id = "botao";
+	            botaoAvaliacao.disabled = "true";
+				botaoAvaliacao.className = "btnw btn my-3 ml-3 float-left"
+				botaoAvaliacao.innerHTML = "<i class='fas fa-star text-white'></i>";
 
 				
 
@@ -203,23 +244,20 @@ function getDoFilmes() {
 				divRow.appendChild(divCol);
 				divCol2.appendChild(img)
 				divCol.appendChild(p1)
+				divCol.appendChild(p5)
 				divCol.appendChild(ul)
 				ul.appendChild(liFavoritos);
-				liFavoritos.appendChild(botao1);
+				liFavoritos.appendChild(botaoFavoritos);
 				ul.appendChild(liLista);
-				liLista.appendChild(botao);
+				liLista.appendChild(botaoListaFilmes);
+				ul.appendChild(liInteresse);
+				liInteresse.appendChild(botaoInteresses)
 				ul.appendChild(liAvaliacao);
-				liAvaliacao.appendChild(botao2);
-	         	//divCol.appendChild(botao1)
-				//divCol.appendChild(botao)
-				//divCol.appendChild(botao2)
-				divCol.appendChild(p2)
+				liAvaliacao.appendChild(botaoAvaliacao);
 				divCol.appendChild(p3)
-				divCol.appendChild(p5)
+				divCol.appendChild(p2)
+				divCol.appendChild(inputImagem)
 				divCol.appendChild(idFilme)
-				divCol.appendChild(idGeneroTe)
-				divCol.appendChild(backdrop)
-				divCol.appendChild(poster)
 				//Adicionando a árvore a cima para ser filha da div com id = lista
 				document.getElementById('lista').appendChild(divRow);
 			}

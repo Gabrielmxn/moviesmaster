@@ -29,7 +29,6 @@ if((isset ($_SESSION['login']) == true) and (isset ($_SESSION['senha']) == true)
     <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="icon" href="http://localhost/novoSite/img/favicon.ico" sizes="32x32" />
-    <title>MoviesMaster - Login</title>
   </head>
   <body>
     <form action="mistermovies_controller.php" method="post" class="login-form">

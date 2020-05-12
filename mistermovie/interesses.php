@@ -4,26 +4,23 @@
 	include "mistermovies_controller.php";
 ?>
 <!DOCTYPE html>
-
 <html>
-<head>
-	<!-- Página que vai lista os filmes do usuário -->
-	<title>Lista - Usuário</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style_principal.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="icon" href="http://localhost/novoSite/img/favicon.ico" sizes="32x32">
-	<link rel="stylesheet" href="fontawesome/css/all.css" />
-	<meta charset="utf-8">
-	 
-	 <link rel="stylesheet" href="css/footer.css">
-</head>
+	<head>
+		<!-- Página que vai lista os filmes do usuário -->
+		<title>Interesses - MisterMovie</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style_principal.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="icon" href="http://localhost/novoSite/img/favicon.ico" sizes="32x32">
+		<link rel="stylesheet" href="fontawesome/css/all.css" />
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/footer.css">
+	</head>
 <body>
-	<!-- Colocando os ID dos filmes dentro do value -->
-	<input id="valor" type="hidden" value='<?=$_SESSION['filme']?>' >
+	<input id="valor" type="hidden" value='<?=$_SESSION['filmesInteresses']?>' >
 	<input id="pagQuant" type="hidden" value='0' >
 	<div class="container-fluid">
-		<h3 class="my-3">Sua lista de filmes</h3>
+		<h3 class="my-3">Minha lista de interesses</h3>
 		<div id="listFilmes" class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1">	
 		</div>
 	</div>

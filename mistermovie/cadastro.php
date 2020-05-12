@@ -1,16 +1,12 @@
-    <!-- Título -->
-   <?php 
-   $erro = "";
-
-    if($_GET){
-      if($_GET['erro'] == "senhadusuario"){
-        $erro = "Sua senha não está igual";
-       
-      }
-      else if ($_GET['erro'] == "exitusuario"){
-        $erro = "O nome de usuário já existe.";
-        
-      }
+<?php 
+  $erro = "";
+  if($_GET){
+    if($_GET['erro'] == "senhadusuario"){
+      $erro = "Sua senha não está igual";    
+    }
+    else if ($_GET['erro'] == "exitusuario"){
+      $erro = "O nome de usuário já existe.";
+    }
 }
 ?>
 

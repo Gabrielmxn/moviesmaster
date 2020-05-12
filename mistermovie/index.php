@@ -26,13 +26,13 @@ include "php/carousel.php";
 <body>
 	<div class="container-fluid mt-3 colorDiv">
 		<h3 class="ml-3 mt-3">Melhores filmes</h3>
-		<div  class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1" id="listaMelhoresFilmes">	
+		<div  class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1 mb-1" id="listaMelhoresFilmes">	
 		</div>
 		<h3 class="ml-3">Filmes mais classificados</h3>
-		<div  class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1" id="listaMaisClassificados">		
+		<div  class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1 mb-1" id="listaMaisClassificados">		
 		</div>
 		<h3 class="ml-3">Próximos nos cinemas</h3>
-		<div  class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1" id="listaNosCinemas">	
+		<div  class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1 mb-1" id="listaNosCinemas">	
 		</div>
 		<br><br>
 	</div>
@@ -45,7 +45,7 @@ include "php/carousel.php";
 	<script>
  		$(document).ready(function(){ 
  			getFilmesPrincipais();
- 		})   
+ 		})
  	</script>
 </body> 
 </html>

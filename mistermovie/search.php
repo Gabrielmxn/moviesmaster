@@ -24,32 +24,17 @@ $pesquisa = $_GET['pesquisa'];
 </head>
 <body>
 	<!-- Paginação <nav aria-label="Navegação de página exemplo">
-	<ul class="pagination justify-content-center">
-		<li class="page-item disabled">
-		    <button class="page-link" href="#" tabindex="-1">Anterior</button>
-		</li>
-		<li class="page-item">
-			<button class="page-link" onclick="getPesquisaFilmes(1)">1</button>
-		</li>
-		<li class="page-item">
-			<button class="page-link" onclick="getPesquisaFilmes(2)">2</button>
-		</li>
-		<li class="page-item">
-			<button class="page-link" onclick="getPesquisaFilmes(3)">3</button>
-		</li>
-		<li class="page-item">
-		    <button class="page-link" href="#">Próximo</button>
-		</li>
-		  </ul>
 		</nav> -->
 	<input id="pesquisar" type="hidden" value='<?= $pesquisa ?>' >
+	<input id="paginaPesquisar" type="hidden" value="1">
 	<div class="container-fluid">
 		<p class="ml-3 mt-3">Você pesquisou por "<?=$pesquisa?>"</p>
 		<p class="ml-3 mt-3" id="mensagemVazia"></p>
 		<div id="listaPesquisa" class="row text-left align-middle d-flex  justify-content-center justify-content-sm-center  justify-content-md-center justify-content-lg-start mx-lg-1">	
 		</div>
 	</div>
-	<br><br>
+		<button id="botaoMostrarMais" class="d-block btn btn-primary btn-block my-2">Mostrar mais</button>
+		<br>
     <?php include "php/footer.php"?>
 	<script src="js/aJaxRecuperandoFilmesAPI.js"></script>
 	<script src="js/ancora.js"></script>
@@ -62,6 +47,29 @@ $pesquisa = $_GET['pesquisa'];
  		$(document).ready(function(){ 
  		 let pesquisaKey = $('#pesquisar').val()
  		if(pesquisaKey == 'DC COMICS'){
+			obterFilmesPalavraChave(849);
+			document.title = "DC COMICS - MisterMovie"
+		}
+		else if(pesquisaKey == 'MARVEL'){
+			document.title = "MARVEL - MisterMovie"
+			obterFilmesPalavraChave(180547);
+		}
+		else if(pesquisaKey == "disney"){
+			document.title = "DISNEY - MisterMovie"
+			$('#pesquisar').val('disney e pixar');
+			getPesquisaFilmes();
+		}
+		else if(pesquisaKey == " "){
+			$('#mensagemVazia').html('Nenhum filme foi encontado');
+		}
+		else {
+			getPesquisaFilmes();
+		}
+ 		  })
+
+ 		$('#botaoMostrarMais').click( () => {
+ 			let pesquisaKey = $('#pesquisar').val();
+ 			if(pesquisaKey == 'DC COMICS'){
 			obterFilmesPalavraChave(849);
 		}
 		else if(pesquisaKey == 'MARVEL'){
@@ -77,7 +85,7 @@ $pesquisa = $_GET['pesquisa'];
 		else {
 			getPesquisaFilmes();
 		}
- 		  })
+ 		})	
  	</script>
 </body>
 </html>
