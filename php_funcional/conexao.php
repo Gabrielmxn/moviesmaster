@@ -15,5 +15,6 @@ class Conexao {
 			echo '<p>'.$e->getMessege().'</p>';
 		}
 	}
+
 }	
 ?>

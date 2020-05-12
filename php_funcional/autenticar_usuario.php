@@ -42,7 +42,7 @@ class Usuario {
 		}
 
 		catch(PDOExpeption $e){
-					echo $e;
+					echo '<p>'.$e->getMessege().'</p>';
 		}
 	}
 	
@@ -74,7 +74,7 @@ class Usuario {
 			}
 		}
 		catch(PDOExpeption $e){
-			echo $e;
+			echo '<p>'.$e->getMessege().'</p>';
 		}
 	}
 	//trocar senha do usuaário
@@ -100,7 +100,7 @@ class Usuario {
 				}
 			}
 			catch(PDOExpeption $e){
-				echo $e;
+				echo '<p>'.$e->getMessege().'</p>';
 			}	
 		}
 		else{
@@ -108,7 +108,7 @@ class Usuario {
 		}		
 	}
 
-	public function sessionDestroy(){
+	public function sessionDestroyDoUsuario(){
 		session_start();
 		session_destroy();
 		header("location:index.php");

@@ -1,6 +1,6 @@
 <?php 
 
-class ListaFilmes {
+class ListaFavoritos {
 	private $conexao;
 	private $idFilmes;
 	private $idUsuario;
@@ -13,10 +13,10 @@ class ListaFilmes {
 		$this->nomeFilme = $nomeFilme;
 	}
 
-	public function filmeNaLista(){
+	public function filmeNaListaFavoritos(){
 		try{
 			//codigo para inserir o filme. Toda lógica aqui dentro
-			$query = "select * FROM usuario_filmes ";
+			$query = "select * FROM usuario_favoritos ";
 			$query .= "WHERE idFilmes = :idFilme AND idUsuario = :usuario";
 			$stmt =  $this->conexao->prepare($query);
 			$stmt->bindValue(':usuario', $this->idUsuario);
@@ -25,11 +25,10 @@ class ListaFilmes {
 			$resultado = $stmt->rowCount();
 			//echo "valor do resultado " . $resultado;
 			if($resultado !== 0){
-				$_SESSION['filmeNaLista'] = 'true';
+				$_SESSION['filmeNaListaFavoritos'] = 'true';
 			}
 			else{
-				
-				$_SESSION['filmeNaLista'] = 'false';
+				$_SESSION['filmeNaListaFavoritos'] = 'false';
 				//echo "o filme já está na sua lista";	
 			}		
 		}	
@@ -38,9 +37,9 @@ class ListaFilmes {
 		}
 	} 
 	
-	public function inserirFilmes(){
+	public function inserirFilmesFavoritos(){
 		try{
-			$query = "select * FROM usuario_filmes ";
+			$query = "select * FROM usuario_favoritos ";
 			$query .= "WHERE idFilmes = :idFilme AND idUsuario = :usuario";
 			$stmt =  $this->conexao->prepare($query);
 			$stmt->bindValue(':usuario', $this->idUsuario);
@@ -55,7 +54,7 @@ class ListaFilmes {
 				$stmt->execute();
 				$verificarQuantLinhas = $stmt->rowCount();
 					if($verificarQuantLinhas !== 0){
-						$query = "insert into usuario_filmes(idFilmes, idUsuario)";
+						$query = "insert into usuario_favoritos(idFilmes, idUsuario)";
 						$query .= "values(:idFilme,:idusuario)";
 						$stmt =  $this->conexao->prepare($query);
 						$stmt->bindValue(':idFilme', $this->idFilmes);
@@ -70,7 +69,7 @@ class ListaFilmes {
 						$stmt->bindValue(':tituloFilme', $this->nomeFilme);
 						$stmt->execute();
 
-						$query = "insert into usuario_filmes(idFilmes, idUsuario)";
+						$query = "insert into usuario_favoritos(idFilmes, idUsuario)";
 						$query .= "values(:idFilme,:idusuario)";
 						$stmt = $this->conexao->prepare($query);
 						$stmt ->bindValue(':idFilme', $this->idFilmes);
@@ -87,9 +86,9 @@ class ListaFilmes {
 		}
 	} 
 
-	public function excluirFilmes(){
+	public function excluirFilmesFavoritos(){
 		try {
-			$query = "delete from usuario_filmes WHERE idFilmes = :idFilme AND idUsuario = :idusuario";
+			$query = "delete from usuario_favoritos WHERE idFilmes = :idFilme AND idUsuario = :idusuario";
 			$stmt =  $this->conexao->prepare($query);
 			$stmt->bindValue(':idFilme', $this->idFilmes);
 			$stmt->bindValue(':idusuario', $this->idUsuario);
@@ -100,10 +99,10 @@ class ListaFilmes {
 		}
 	}
 
-	public function recuperarFilmes(){
+	public function recuperarFilmesFavoritos(){
 		$filmes = "";
 		try {
-			$query = "select * from usuario_filmes WHERE idUsuario = :idusuario";
+			$query = "select * from usuario_favoritos WHERE idUsuario = :idusuario";
 			$stmt = $this->conexao->prepare($query);
 			$stmt ->bindValue(':idusuario', $this->idUsuario);
 			$stmt->execute();
