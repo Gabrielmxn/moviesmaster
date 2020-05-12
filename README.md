@@ -4,7 +4,7 @@
 Projeto criado como Atividade Prática Supervisionada 1 para a matéria de Metodologias Ágeis do Curso de Ciência da Computação da UNISUAM.
 
 **Equipe de Desenvolvimento:**
-- Gabriel Alves - Desenvolvedor Back-End
+- Gabriel Alves - Desenvolvedor Back-End e Front-End
 - Gabriel Ferreira - Banco de Dados
 - Jessica Lessa - Desenvolvedora Front-End
 
