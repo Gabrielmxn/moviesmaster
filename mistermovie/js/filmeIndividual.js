@@ -17,31 +17,41 @@ $(document).ready( () => {
 
 
 function enviarFilmes(){
+	botaoLista.dataset.toggle = "modal";
 	if($('#listaVerificar').val()  == 'true'){
 		$('#listaVerificar').val('false')
 		$('#botaoLista').html("<i class='fas fa-list text-white'></i>")
+		botaoLista.dataset.target = "#dialogRemoverLista";
+
 	}else if($('#listaVerificar').val() == 'false') {
 		$('#listaVerificar').val('true')
 		$('#botaoLista').html("<i class='fas fa-list text-danger'></i>")
+		botaoLista.dataset.target = "#dialogLista";
 	}
 }
 
 function enviarFilmesFavoritos(){
+	botaoFavoritos.dataset.toggle = "modal";
 	if($('#listaVerificarFavoritos').val()  == 'true'){
 		$('#listaVerificarFavoritos').val('false')
 		$('#botaoFavoritos').html("<i class='fas fa-heart text-white'></i>")
+		botaoFavoritos.dataset.target = "#dialogRemoverFavoritos";
 	}else if($('#listaVerificarFavoritos').val() == 'false') {
 		$('#listaVerificarFavoritos').val('true')
 		$('#botaoFavoritos').html("<i class='fas fa-heart text-danger'></i>")
+		botaoFavoritos.dataset.target = "#dialogFavoritos";
 	}
 }
 function enviarFilmesInteresses(){
+	botaoInteresses.dataset.toggle = "modal";
 	if($('#listaVerificarInteresses').val()  == 'true'){
 		$('#listaVerificarInteresses').val('false')
 		$('#botaoInteresses').html("<i class='fas fa-bookmark text-white'></i>")
+		botaoInteresses.dataset.target = "#dialogRemoverInteresses";
 	}else if($('#listaVerificarInteresses').val() == 'false') {
 		$('#listaVerificarInteresses').val('true')
 		$('#botaoInteresses').html("<i class='fas fa-bookmark text-danger'></i>")
+		botaoInteresses.dataset.target = "#dialogInteresses";
 	}
 }
 

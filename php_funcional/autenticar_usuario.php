@@ -37,7 +37,7 @@ class Usuario {
 				header("location:index.php");
 			}
 			else{
-				header('location:login.php');
+				header('location:login.php?mensagem=errousuario');
 			}
 		}
 
@@ -56,14 +56,13 @@ class Usuario {
 			$resultado = $stmt->rowCount();
 			if($resultado !== 1){
 				if($this->senha == $this->senhaConfirmada1){
-					echo "cadastrado com sucesso";
 					$query = "insert into usuario(nome, senha)";
 					$query .= "values(:novousuario, :senha)";
 					$stmtt = $this->conexao->prepare($query);
 					$stmtt->bindValue(':novousuario', $this->usuario);
 					$stmtt->bindValue(':senha', $this->senha);
 					$stmtt->execute();
-					header('location:login.php?cadastro=sucesso');
+					header("location:login.php?mensagem=cadastroSucesso");
 				}
 				else {
 					header("location:cadastro.php?erro=senhadusuario");
@@ -91,7 +90,7 @@ class Usuario {
 					$stmt->execute();
 					$resultado = $stmt->fetch();
 					session_destroy();
-					header("location:login.php?trocaSenha=sucesso");
+					header("location:login.php?mensagem=trocarSenhaSucesso");
 					exit;
 				}
 				else{
