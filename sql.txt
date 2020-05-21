@@ -1,4 +1,4 @@
-CREATE DATABASE mistermoveis;
+CREATE DATABASE mistermovie;
 
 
 CREATE TABLE usuario(
@@ -8,10 +8,6 @@ CREATE TABLE usuario(
 );
 
 
-CREATE TABLE status(
-	idStatus INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	status varchar(200) NOT NULL
-);
 
 CREATE TABLE filmes(
 	idFilmes INT NOT NULL PRIMARY KEY,
@@ -21,14 +17,24 @@ CREATE TABLE filmes(
 
 CREATE TABLE usuario_filmes(
 	idFilmes INT NOT NULL,
-	idUsuario INT NOT NULL,
-	idStatus INT NOT NULL,
-	FOREIGN KEY(idStatus) REFERENCES status(idStatus),  
+	idUsuario INT NOT NULL,  
 	FOREIGN KEY(idFilmes) REFERENCES filmes(idFilmes ),
 	FOREIGN KEY(idUsuario) REFERENCES usuario(idUsuario)
 );
 
-INSERT INTO status(status)values("Visto");
-INSERT INTO status(status)values("NãoVisto");
+CREATE TABLE usuario_favoritos(
+	idFilmes INT NOT NULL,
+	idUsuario INT NOT NULL,  
+	FOREIGN KEY(idFilmes) REFERENCES filmes(idFilmes ),
+	FOREIGN KEY(idUsuario) REFERENCES usuario(idUsuario)
+);
+
+CREATE TABLE usuario_interesse(
+	idFilmes INT NOT NULL,
+	idUsuario INT NOT NULL,  
+	FOREIGN KEY(idFilmes) REFERENCES filmes(idFilmes ),
+	FOREIGN KEY(idUsuario) REFERENCES usuario(idUsuario)
+);
+
 
 	

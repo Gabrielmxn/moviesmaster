@@ -1,0 +1,48 @@
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	color: white;
+}
+
+.btnw{
+	display:block;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	background-color: #000;
+	border: none !important;  
+}
+
+.btnw:focus{
+	border-color: inherit; 
+	-webkit-box-shadow: none; 
+	box-shadow: none; 
+}
+
+.img-fluid{
+	width: 300px;
+}
+
+@media (min-width: 992px) {
+	.row {
+ 		background-color: rgba(1, 1, 1, 0.7);
+ 		height: 100%;
+ 		background-size: 100%;
+	}
+}
+@media (max-width: 400px){
+	#lacamento,  #hora, #genero{
+		display: block;
+	}
+}
+@media (max-width: 991px) {
+	body {
+		color: black;
+	}
+ 	.img-fluid{
+ 		width: 200px !important;
+ 	} 
+}
