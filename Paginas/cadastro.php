@@ -45,15 +45,15 @@
       <!-- Username -->
       <div class="txtb"> 
         <input type="text" name="novoUsuario" required="required" />
-        <span data-placeholder="Digite seu usuário"></span>
+        <span data-placeholder="Digite seu nome de usuário"></span>
+      </div>
+      <div class="txtb">
+        <input type="email" name="email" required="required"/>
+        <span data-placeholder="Digite seu email"></span>
       </div>
       <div class="txtb">
         <input type="password" name="novaSenha" required="required"/>
-        <span data-placeholder="Digite sua senha"></span>
-      </div>
-      <div class="txtb">
-        <input type="password" name="novaSenha2" required="required"/>
-        <span data-placeholder="Digite novamente sua senha"></span>
+        <span data-placeholder="Digite senha"></span>
       </div>
 
       <input type="submit" class="logbtn" value="Trocar" />

@@ -28,7 +28,7 @@ if((isset ($_SESSION['login']) == true) and (isset ($_SESSION['senha']) == true)
     <!--<link rel="stylesheet" href="../css/style_principal.css" crossorigin="anonymous">-->
 
     
-    <title>MoviesMaster Login</title>
+    <title>MisterMovies Login</title>
   </head>
   <body>
     <form action="../php/autenticacao.php" method="post" class="login-form">
